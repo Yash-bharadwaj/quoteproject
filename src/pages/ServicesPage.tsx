@@ -18,35 +18,40 @@ const detailedServices = [
     title: "Hospitality Design",
     category: "Hotels & Resorts",
     desc: "We create immersive guest experiences that blend luxury with operational efficiency. Our approach focuses on creating a unique sense of place while ensuring that every operational aspect—from staff flow to guest privacy—is seamlessly integrated. Our work at the Monastery Hotel, Hyderabad, stands as a testament to our hospitality expertise, where we balanced heritage aesthetics with modern luxury.",
-    features: ["Lobby & Reception Areas", "Guest Suites", "Fine Dining Restaurants", "Wellness & Spa Centers", "Operational Flow Planning", "Acoustic & Lighting Design"]
+    features: ["Lobby & Reception Areas", "Guest Suites", "Fine Dining Restaurants", "Wellness & Spa Centers", "Operational Flow Planning", "Acoustic & Lighting Design"],
+    image: "/dpeipics/WhatsApp Image 2026-02-23 at 11.57.35.jpeg",
   },
   {
     icon: <Home size={40} />,
     title: "Residential Interiors",
     category: "Luxury Homes",
     desc: "Transforming houses into homes that reflect the unique personality of their owners. We specialize in high-end villas and premium apartments, focusing on bespoke solutions that prioritize both comfort and sophistication. Our residential projects are characterized by a harmonious blend of textures, custom-designed furniture, and intelligent space planning that adapts to your lifestyle.",
-    features: ["Bespoke Furniture", "Smart Home Integration", "Kitchen & Wardrobe Solutions", "Landscape Integration", "Custom Art Curation", "Lighting Control Systems"]
+    features: ["Bespoke Furniture", "Smart Home Integration", "Kitchen & Wardrobe Solutions", "Landscape Integration", "Custom Art Curation", "Lighting Control Systems"],
+    image: "/dpeipics/WhatsApp Image 2026-02-23 at 11.58.24.jpeg",
   },
   {
     icon: <Building2 size={40} />,
     title: "Corporate Spaces",
     category: "Offices",
     desc: "Designing workspaces that foster productivity and innovation while reinforcing your corporate brand identity. We understand that the modern office is more than just a place to work; it's a hub for collaboration and culture. Our designs incorporate ergonomic principles, sustainable materials, and flexible layouts that can evolve with your business needs.",
-    features: ["Executive Suites", "Collaborative Zones", "Conference Facilities", "Ergonomic Planning", "Brand Identity Integration", "IT & AV Infrastructure"]
+    features: ["Executive Suites", "Collaborative Zones", "Conference Facilities", "Ergonomic Planning", "Brand Identity Integration", "IT & AV Infrastructure"],
+    image: "/dpeipics/WhatsApp Image 2026-02-23 at 11.58.30.jpeg",
   },
   {
     icon: <Store size={40} />,
     title: "Commercial & Retail",
     category: "Outlets & Showrooms",
     desc: "Strategic retail design that maximizes customer engagement and optimizes product display. We combine psychological insights with architectural precision to create environments that guide the customer journey and enhance brand perception. From high-end showrooms to boutique outlets, we ensure your physical space is your most powerful marketing tool.",
-    features: ["Visual Merchandising", "Lighting Design", "Customer Flow Optimization", "Brand Integration", "Point of Sale Design", "Storage & Inventory Planning"]
+    features: ["Visual Merchandising", "Lighting Design", "Customer Flow Optimization", "Brand Integration", "Point of Sale Design", "Storage & Inventory Planning"],
+    image: "/dpeipics/WhatsApp Image 2026-02-23 at 11.58.33.jpeg",
   },
   {
     icon: <Monitor size={40} />,
     title: "Modular Solutions",
     category: "Kiosks & Displays",
     desc: "Functional, eye-catching, and modular solutions for temporary or permanent brand presence. We specialize in creating high-impact modular units that are easy to assemble, durable, and highly customizable. Whether it's a mall kiosk or an exhibition stall, our solutions are designed to stand out in high-traffic environments while maintaining brand consistency.",
-    features: ["Exhibition Stalls", "Mall Kiosks", "Pop-up Stores", "Modular Displays", "Portable Branding Units", "Integrated Digital Signage"]
+    features: ["Exhibition Stalls", "Mall Kiosks", "Pop-up Stores", "Modular Displays", "Portable Branding Units", "Integrated Digital Signage"],
+    image: "/dpeipics/WhatsApp Image 2026-02-23 at 12.00.03.jpeg",
   }
 ];
 
@@ -107,10 +112,9 @@ export default function ServicesPage() {
             </div>
             <div className={`relative aspect-square rounded-2xl sm:rounded-[3rem] overflow-hidden ${index % 2 !== 0 ? 'lg:order-1' : ''}`}>
               <img 
-                src={`https://picsum.photos/seed/${service.title}/1000/1000`} 
+                src={service.image} 
                 alt={service.title} 
                 className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
-                referrerPolicy="no-referrer"
               />
               <div className="absolute inset-0 bg-black/20" />
             </div>

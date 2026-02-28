@@ -19,12 +19,16 @@ export default function Navbar() {
   return (
     <>
       <nav className="fixed top-0 w-full z-50 bg-black/50 backdrop-blur-xl border-b border-white/5 px-6 py-4 flex justify-between items-center">
-        <Link to="/" className="flex flex-col group">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-white text-black font-serif font-bold flex items-center justify-center rounded group-hover:bg-brand-gold transition-colors">DP</div>
-            <span className="font-serif text-xl font-bold tracking-tight uppercase">DEE PIESS</span>
+        <Link to="/" className="flex items-center gap-3 group">
+          <img 
+            src="/dpeipics/DpeiLogo.png" 
+            alt="DEE PIESS Logo" 
+            className="w-10 h-10 object-contain invert brightness-200"
+          />
+          <div className="flex flex-col">
+            <span className="font-serif text-xl font-bold tracking-tight uppercase leading-none">DEE PIESS</span>
+            <span className="text-[8px] uppercase tracking-[0.4em] text-white/40 font-bold group-hover:text-brand-gold transition-colors">Interior Projects</span>
           </div>
-          <span className="text-[8px] uppercase tracking-[0.4em] text-white/40 font-bold ml-10 -mt-1 group-hover:text-brand-gold transition-colors">Interior Projects</span>
         </Link>
         
         {/* Desktop Links */}
