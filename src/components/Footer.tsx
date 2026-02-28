@@ -8,7 +8,7 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto flex flex-row justify-between items-center gap-2 sm:gap-8">
         {/* Left: Logo */}
         <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
-          <div className="w-6 h-6 sm:w-7 sm:h-7 bg-white text-black font-serif font-bold flex items-center justify-center rounded text-[10px] sm:text-sm">DP</div>
+          <img src="/dpeipics/DpeiLogo.png" alt="DEE PIESS" className="w-6 h-6 sm:w-7 sm:h-7" />
           <span className="font-serif text-[10px] sm:text-base font-bold tracking-tight uppercase hidden xs:inline">DEE PIESS</span>
         </div>
 

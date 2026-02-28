@@ -23,7 +23,7 @@ export default function Navbar() {
           <img 
             src="/dpeipics/DpeiLogo.png" 
             alt="DEE PIESS Logo" 
-            className="w-10 h-10 object-contain invert brightness-200"
+            className="w-10 h-10 object-contain"
           />
           <div className="flex flex-col">
             <span className="font-serif text-xl font-bold tracking-tight uppercase leading-none">DEE PIESS</span>
