@@ -37,7 +37,8 @@ const PDFPreview = forwardRef<HTMLDivElement, PDFPreviewProps>(({ data }, ref) =
               </div>
             )}
             <div>
-              <h1 className="text-2xl font-serif font-bold tracking-tight">{COMPANY_DETAILS.name}</h1>
+              <h1 className="text-2xl font-serif font-bold tracking-tight leading-none">{COMPANY_DETAILS.name}</h1>
+              <p className="text-[10px] uppercase tracking-[0.3em] font-bold text-stone-400 mb-2">{COMPANY_DETAILS.tagline}</p>
               <p className="text-stone-500 max-w-[250px]">{COMPANY_DETAILS.address}</p>
               <p className="text-stone-500">GST: {COMPANY_DETAILS.gstin}</p>
               <p className="text-stone-500">Ph: {COMPANY_DETAILS.phone}</p>
@@ -117,9 +118,9 @@ const PDFPreview = forwardRef<HTMLDivElement, PDFPreviewProps>(({ data }, ref) =
               </div>
             )}
             <div className="h-px bg-stone-200 my-1" />
-            <div className="flex justify-between text-base font-serif font-bold">
-              <span>Grand Total</span>
-              <span className="text-brand-gold">{formatCurrency(data.grandTotal)}</span>
+            <div className="flex justify-between items-center pt-1">
+              <span className="text-[9px] uppercase tracking-[0.2em] text-stone-400 font-bold">Grand Total</span>
+              <span className="text-xl font-sans font-bold tracking-tight text-brand-ink leading-none">{formatCurrency(data.grandTotal)}</span>
             </div>
             {data.advance > 0 && (
               <>

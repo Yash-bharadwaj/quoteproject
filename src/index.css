@@ -5,6 +5,8 @@
   --font-serif: "Cormorant Garamond", serif;
   --font-sans: "Inter", sans-serif;
   
+  --breakpoint-xs: 480px;
+  
   --color-brand-bg: #F5F2ED;
   --color-brand-ink: #1A1A1A;
   --color-brand-accent: #5A5A40; /* Muted Olive */

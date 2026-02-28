@@ -15,27 +15,27 @@ const ItemCard: React.FC<ItemCardProps> = ({ item, onDelete, onEdit, onClone }) 
     <div className="bg-white p-4 rounded-xl border border-stone-200 shadow-sm hover:shadow-md transition-shadow group">
       <div className="flex justify-between items-start mb-2">
         <h4 className="font-medium text-brand-ink leading-tight">{item.description}</h4>
-        <div className="flex gap-1 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity">
+        <div className="flex gap-1 md:opacity-0 md:group-hover:opacity-100 transition-opacity">
           <button 
             onClick={() => onClone(item)}
-            className="p-2 text-stone-400 hover:text-brand-gold hover:bg-stone-50 rounded-lg transition-all active:scale-90"
+            className="p-1.5 text-stone-400 hover:text-brand-gold hover:bg-stone-50 rounded-lg transition-all active:scale-90"
             title="Clone Item"
           >
-            <Copy size={14} />
+            <Copy size={12} />
           </button>
           <button 
             onClick={() => onEdit(item)}
-            className="p-2 text-stone-400 hover:text-brand-accent hover:bg-stone-50 rounded-lg transition-all active:scale-90"
+            className="p-1.5 text-stone-400 hover:text-brand-accent hover:bg-stone-50 rounded-lg transition-all active:scale-90"
             title="Edit Item"
           >
-            <Edit3 size={14} />
+            <Edit3 size={12} />
           </button>
           <button 
             onClick={() => onDelete(item.id)}
-            className="p-2 text-stone-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-all active:scale-90"
+            className="p-1.5 text-stone-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-all active:scale-90"
             title="Delete Item"
           >
-            <Trash2 size={14} />
+            <Trash2 size={12} />
           </button>
         </div>
       </div>
