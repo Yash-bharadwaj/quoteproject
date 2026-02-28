@@ -66,17 +66,20 @@ export default function QuotationGenerator() {
   const [isGenerating, setIsGenerating] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const [showPreviewModal, setShowPreviewModal] = useState(false);
-  const [zoom, setZoom] = useState(0.8); // Default desktop zoom
+  const [zoom, setZoom] = useState(0.8);
   const [mobileZoom, setMobileZoom] = useState(0.4);
+  // Visual preview refs (may be scaled/hidden)
   const pdfRef = useRef<HTMLDivElement>(null);
   const modalPdfRef = useRef<HTMLDivElement>(null);
+  // Dedicated off-screen capture ref — always mounted, never transformed
+  const captureRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Auto-calculate mobile zoom to fit screen width
   useEffect(() => {
     if (showPreviewModal) {
       const screenWidth = window.innerWidth;
-      const docWidth = 210 * 3.78; // 210mm in pixels approx
+      const docWidth = 794; // A4 at 96dpi
       const padding = 40;
       const fitZoom = (screenWidth - padding) / docWidth;
       setMobileZoom(Math.min(Math.max(0.2, fitZoom), 1));
@@ -209,44 +212,58 @@ export default function QuotationGenerator() {
     }));
   };
 
-  const handleDownloadPDF = async (targetRef: React.RefObject<HTMLDivElement | null>) => {
-    if (!targetRef.current) return;
+  const handleDownloadPDF = async () => {
+    // Always capture from the off-screen element — never from a scaled/hidden preview
+    const el = captureRef.current;
+    if (!el) return;
     setIsGenerating(true);
-    
+
     try {
-      const canvas = await html2canvas(targetRef.current, {
-        scale: 3,
+      // Wait one frame so React has flushed any pending renders
+      await new Promise<void>(resolve => requestAnimationFrame(() => resolve()));
+
+      const canvas = await html2canvas(el, {
+        scale: 3,           // 3x for crisp text on retina screens
         useCORS: true,
+        allowTaint: false,
         logging: false,
         backgroundColor: '#ffffff',
-        width: 794,
-        onclone: (clonedDoc) => {
-          const el = clonedDoc.getElementById('quotation-pdf');
-          if (el) {
-            if (el.parentElement) el.parentElement.style.transform = 'none';
-            el.style.boxShadow = 'none';
-            el.style.margin = '0';
-            el.style.transform = 'none';
+        width: el.scrollWidth,
+        height: el.scrollHeight,
+        windowWidth: el.scrollWidth,
+        windowHeight: el.scrollHeight,
+        onclone: (_clonedDoc, cloned) => {
+          // Guarantee no transforms exist on the cloned capture element or its parents
+          let node: HTMLElement | null = cloned;
+          while (node) {
+            node.style.transform = 'none';
+            (node.style as unknown as Record<string, string>).webkitTransform = 'none';
+            node.style.boxShadow = 'none';
+            node = node.parentElement;
           }
+          cloned.style.position = 'static';
+          cloned.style.margin = '0';
+          cloned.style.padding = '38px 45px';
         }
       });
-      
+
       const imgData = canvas.toDataURL('image/png');
       const pdf = new jsPDF('p', 'mm', 'a4');
-      const imgWidth = 210;
-      const pageHeight = 297;
-      const imgHeight = (canvas.height * imgWidth) / canvas.width;
-      let heightLeft = imgHeight;
+      const A4_W = 210;
+      const A4_H = 297;
+      const imgHeightMm = (canvas.height * A4_W) / canvas.width;
+
+      let heightLeft = imgHeightMm;
       let position = 0;
 
-      pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-      heightLeft -= pageHeight;
+      pdf.addImage(imgData, 'PNG', 0, position, A4_W, imgHeightMm);
+      heightLeft -= A4_H;
 
-      while (heightLeft >= 0) {
-        position = heightLeft - imgHeight;
+      while (heightLeft > 0) {
+        position -= A4_H;
         pdf.addPage();
-        pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-        heightLeft -= pageHeight;
+        pdf.addImage(imgData, 'PNG', 0, position, A4_W, imgHeightMm);
+        heightLeft -= A4_H;
       }
 
       pdf.save(`Quotation_${data.client.name || 'Client'}_${data.client.quoteNumber}.pdf`);
@@ -255,7 +272,7 @@ export default function QuotationGenerator() {
       setShowPreviewModal(false);
     } catch (error) {
       console.error('PDF Generation failed', error);
-      alert('Failed to generate PDF.');
+      alert('Failed to generate PDF. Please try again.');
     } finally {
       setIsGenerating(false);
     }
@@ -315,6 +332,20 @@ export default function QuotationGenerator() {
 
   return (
     <div className="min-h-screen flex flex-col lg:flex-row overflow-hidden bg-stone-50">
+      {/* Off-screen capture element — always mounted, never scaled, never hidden */}
+      <div
+        aria-hidden="true"
+        style={{
+          position: 'fixed',
+          left: '-9999px',
+          top: 0,
+          pointerEvents: 'none',
+          zIndex: -1,
+          overflow: 'visible',
+        }}
+      >
+        <PDFPreview data={data} ref={captureRef} forCapture />
+      </div>
       {/* Left Side: Form */}
       <div className="flex-1 overflow-y-auto bg-white border-r border-stone-200 no-print">
         <header className="sticky top-0 z-20 bg-white/80 backdrop-blur-md border-b border-stone-200 px-4 py-2.5 flex justify-between items-center">
@@ -460,7 +491,7 @@ export default function QuotationGenerator() {
             <button onClick={() => setZoom(prev => Math.min(1.5, prev + 0.1))} className="p-1 hover:bg-stone-100 rounded-lg transition-colors text-stone-500"><Plus size={16} /></button>
           </div>
           <div className="flex gap-4">
-            <button onClick={() => handleDownloadPDF(pdfRef)} disabled={isGenerating} className="bg-brand-ink text-white px-10 py-4 rounded-2xl font-bold flex items-center gap-3 shadow-2xl hover:bg-brand-ink/90 transition-all disabled:opacity-50 active:scale-[0.98] group">{isGenerating ? 'Generating...' : <><Download size={20} /> Generate PDF</>}</button>
+            <button onClick={() => handleDownloadPDF()} disabled={isGenerating} className="bg-brand-ink text-white px-10 py-4 rounded-2xl font-bold flex items-center gap-3 shadow-2xl hover:bg-brand-ink/90 transition-all disabled:opacity-50 active:scale-[0.98] group">{isGenerating ? 'Generating...' : <><Download size={20} /> Generate PDF</>}</button>
             <button onClick={handleShareWhatsApp} className="bg-white text-brand-ink px-8 py-4 rounded-2xl font-bold flex items-center gap-3 shadow-lg hover:bg-stone-50 transition-all border border-stone-200 active:scale-[0.98]"><Share2 size={20} /> Share</button>
           </div>
         </div>
@@ -487,7 +518,7 @@ export default function QuotationGenerator() {
             </div>
             <div className="bg-white border-t border-stone-200 p-4 pb-8 flex flex-col gap-3 shadow-[0_-10px_30px_rgba(0,0,0,0.05)]">
               <div className="flex gap-2">
-                <button onClick={() => handleDownloadPDF(modalPdfRef)} disabled={isGenerating} className="flex-1 bg-brand-ink text-white rounded-xl py-3.5 font-bold text-sm flex items-center justify-center gap-2 shadow-lg active:scale-[0.98] transition-all disabled:opacity-50">{isGenerating ? 'Generating...' : <><Download size={18} /> Download PDF</>}</button>
+                <button onClick={() => handleDownloadPDF()} disabled={isGenerating} className="flex-1 bg-brand-ink text-white rounded-xl py-3.5 font-bold text-sm flex items-center justify-center gap-2 shadow-lg active:scale-[0.98] transition-all disabled:opacity-50">{isGenerating ? 'Generating...' : <><Download size={18} /> Download PDF</>}</button>
                 <button onClick={handleShareWhatsApp} className="w-12 h-12 bg-emerald-500 text-white rounded-xl flex items-center justify-center shadow-lg active:scale-[0.98] transition-all"><Share2 size={20} /></button>
               </div>
               <button onClick={handleExportProject} className="w-full bg-stone-50 text-stone-500 rounded-lg py-2 text-[10px] font-bold uppercase tracking-widest flex items-center justify-center gap-2 transition-all border border-stone-100"><Save size={12} /> Save Project (.luxe)</button>
