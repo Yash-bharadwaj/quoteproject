@@ -60,15 +60,15 @@ export default function Footer() {
       {/* Bottom bar */}
       <div className="border-t border-stone-100">
         <div className="max-w-7xl mx-auto px-6 py-4 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <div className="flex flex-col items-center sm:items-start gap-0.5">
-            <p className="text-[10px] uppercase tracking-widest font-bold text-stone-400">© 2026 DEE PIESS. All rights reserved.</p>
-            <p className="flex items-center gap-1 text-[10px] text-stone-300">
-              Designed with <Heart size={9} className="text-red-400 fill-red-400" /> by{' '}
+          <div className="flex flex-col items-center sm:items-start gap-1">
+            <p className="text-[11px] uppercase tracking-widest font-bold text-stone-400">© 2026 DEE PIESS. All rights reserved.</p>
+            <p className="text-[11px] text-stone-600 font-bold flex items-center gap-1.5">
+              Designed with <Heart size={10} className="text-red-400 fill-red-400 shrink-0" /> by{' '}
               <a
                 href="https://linktr.ee/yashwanthbharadwaj"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-stone-400 hover:text-brand-gold transition-colors underline underline-offset-2"
+                className="text-stone-700 font-bold hover:text-brand-gold transition-colors underline underline-offset-2"
               >
                 Yashwanth Bharadwaj
               </a>
