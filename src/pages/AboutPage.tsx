@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { COMPANY_DETAILS } from '../constants';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import { Award, Users, History, Globe, X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Award, Users, History, Globe, X, ChevronLeft, ChevronRight, CheckCircle2 } from 'lucide-react';
 
 const monasteryImages = [
   "/dpeipics/WhatsApp Image 2026-02-23 at 11.57.35.jpeg",
@@ -68,72 +68,147 @@ export default function AboutPage() {
   return (
     <div className="min-h-screen bg-[#0A0A0A] text-white font-sans selection:bg-brand-gold selection:text-brand-ink">
       <Navbar />
-      
-      {/* Hero Section */}
-      <section className="pt-32 sm:pt-40 pb-16 sm:pb-20 px-6 max-w-7xl mx-auto">
-        <motion.p 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-brand-gold text-[10px] sm:text-xs uppercase tracking-[0.4em] font-bold mb-6"
-        >
-          Our Story
-        </motion.p>
-        <motion.h1 
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="text-4xl sm:text-5xl md:text-7xl font-serif font-bold tracking-tighter mb-12 leading-tight"
-        >
-          A Legacy of <br /> <span className="italic font-light text-white/60">Craftsmanship.</span>
-        </motion.h1>
-      </section>
 
-      {/* Founder Section */}
-      <section className="py-16 sm:py-20 bg-white/5">
-        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-          <div className="relative aspect-[4/5] rounded-2xl sm:rounded-[2rem] overflow-hidden">
-            <img 
-              src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=1000" 
-              alt="Founder" 
-              className="w-full h-full object-cover grayscale"
+      {/* Founder Section - The Visionary */}
+      <section className="pt-32 sm:pt-40 pb-20 sm:pb-28 bg-white/5">
+        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-20 items-start">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="relative aspect-[4/5] rounded-2xl sm:rounded-3xl overflow-hidden border border-white/10"
+          >
+            <img
+              src="/dpeipics/DagaSrinivas.png"
+              alt={COMPANY_DETAILS.founder}
+              className="w-full h-full object-cover object-[center_35%]"
               referrerPolicy="no-referrer"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-            <div className="absolute bottom-6 left-6 sm:bottom-8 sm:left-8">
-              <p className="text-brand-gold text-[8px] sm:text-[10px] uppercase tracking-widest font-bold mb-1">Founder</p>
-              <p className="text-xl sm:text-2xl font-serif font-bold">{COMPANY_DETAILS.founder}</p>
+            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
+            <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8">
+              <p className="text-brand-gold text-[10px] sm:text-xs uppercase tracking-[0.3em] font-bold mb-1">Founder & Lead Designer</p>
+              <p className="text-xl sm:text-2xl md:text-3xl font-serif font-bold tracking-tight">{COMPANY_DETAILS.founder}</p>
             </div>
-          </div>
-          <div className="space-y-6 sm:space-y-8">
-            <h2 className="text-2xl sm:text-3xl font-serif font-bold">The Visionary</h2>
-            <p className="text-white/50 text-base sm:text-lg leading-relaxed">
-              With over 15 years of experience in the interior architecture industry, {COMPANY_DETAILS.founder} has led DEE PIESS to become a benchmark for quality and innovation in Secunderabad and beyond.
+          </motion.div>
+
+          <div className="lg:pt-4">
+            <p className="text-[10px] sm:text-xs uppercase tracking-[0.35em] text-brand-gold font-bold mb-3">The Visionary</p>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif font-bold text-white tracking-tight">
+              {COMPANY_DETAILS.founder}
+            </h2>
+            <div className="h-1 w-16 bg-brand-gold rounded-full my-6" />
+
+            <p className="text-white/60 text-base sm:text-lg leading-relaxed mb-6">
+              With over 15 years in interior architecture, {COMPANY_DETAILS.founder} has built DEE PIESS from the ground up. Based in Secunderabad, he leads every project from concept to handover — working closely with clients, craftsmen, and vendors to deliver spaces that are both beautiful and built to last.
             </p>
-            <p className="text-white/50 text-base sm:text-lg leading-relaxed">
-              His philosophy centers on the belief that every space has a soul. Our job is to discover it and bring it to life through meticulous design and flawless execution.
+            <p className="text-white/60 text-base sm:text-lg leading-relaxed mb-8">
+              He believes every space has a soul. His job is to find it and bring it to life through clear design, the right materials, and strict attention to detail. No shortcuts, no compromise on finish — that’s the standard he has set for the firm and for everyone who works with him.
             </p>
-            <div className="grid grid-cols-2 gap-6 sm:gap-8 pt-4 sm:pt-8">
-              <div className="flex items-start gap-3 sm:gap-4">
-                <div className="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center shrink-0">
-                  <Award className="text-brand-gold" size={20} />
+
+            <div className="space-y-3 mb-10">
+              {[
+                "Hands-on on every project from start to finish",
+                "Strong focus on quality materials and craftsmanship",
+                "Known for on-time delivery and clear communication",
+              ].map((line, i) => (
+                <div key={i} className="flex items-center gap-3 text-white/70 text-sm sm:text-base">
+                  <div className="w-1.5 h-1.5 rounded-full bg-brand-gold shrink-0" />
+                  <span>{line}</span>
+                </div>
+              ))}
+            </div>
+
+            <blockquote className="border-l-2 border-brand-gold pl-5 py-2 text-white/50 italic text-sm sm:text-base mb-10">
+              “We don’t just design spaces — we build places people want to live and work in.”
+            </blockquote>
+
+            <div className="flex flex-wrap gap-8 sm:gap-12 pt-4 border-t border-white/10">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center">
+                  <Award className="text-brand-gold" size={22} />
                 </div>
                 <div>
-                  <p className="text-lg sm:text-xl font-serif font-bold">500+</p>
-                  <p className="text-[8px] sm:text-[10px] uppercase tracking-widest text-white/30 font-bold">Projects</p>
+                  <p className="text-2xl font-serif font-bold text-white">500+</p>
+                  <p className="text-[10px] uppercase tracking-widest text-white/40 font-bold">Projects</p>
                 </div>
               </div>
-              <div className="flex items-start gap-3 sm:gap-4">
-                <div className="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center shrink-0">
-                  <Users className="text-brand-gold" size={20} />
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center">
+                  <Users className="text-brand-gold" size={22} />
                 </div>
                 <div>
-                  <p className="text-lg sm:text-xl font-serif font-bold">200+</p>
-                  <p className="text-[8px] sm:text-[10px] uppercase tracking-widest text-white/30 font-bold">Clients</p>
+                  <p className="text-2xl font-serif font-bold text-white">200+</p>
+                  <p className="text-[10px] uppercase tracking-widest text-white/40 font-bold">Clients</p>
                 </div>
               </div>
             </div>
           </div>
         </div>
+      </section>
+
+      {/* Stats Section */}
+      <section className="py-12 sm:py-16 border-y border-white/5">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-12">
+            {[
+              { value: "15+", label: "Years of experience" },
+              { value: "500+", label: "Projects delivered" },
+              { value: "100%", label: "Client satisfaction" },
+              { value: "50+", label: "Premium partners" },
+            ].map((stat, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.08 }}
+                className="text-center"
+              >
+                <p className="text-3xl sm:text-4xl font-serif font-bold text-white mb-2">{stat.value}</p>
+                <p className="text-[10px] sm:text-xs uppercase tracking-widest text-white/40 font-bold">{stat.label}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* We focus on quality */}
+      <section className="py-20 sm:py-28 px-6 max-w-4xl mx-auto">
+        <div className="relative">
+          <h2 className="text-[10px] sm:text-xs uppercase tracking-[0.35em] text-brand-gold font-bold mb-4">What we stand for</h2>
+          <h3 className="text-2xl sm:text-3xl font-serif font-bold text-white mb-8 relative z-0">We focus on quality.</h3>
+          <div
+            className="absolute left-0 -bottom-2 w-full max-w-md h-16 pointer-events-none z-[-1]"
+            style={{
+              background: 'radial-gradient(ellipse 80% 50% at 50% 100%, rgba(197,160,89,0.1), transparent 70%)',
+              filter: 'blur(10px)',
+            }}
+            aria-hidden
+          />
+        </div>
+        <p className="text-white/50 text-base sm:text-lg leading-relaxed mb-10">
+          Every project is done with care. We use the best materials, stick to timelines, and never cut corners on finish.
+        </p>
+        <ul className="space-y-4">
+          {[
+            "We pick materials that last and look good.",
+            "We finish on time and within the budget we agree on.",
+            "We don’t compromise on detail — every joint and finish is checked.",
+            "We work with skilled craftsmen and trusted partners.",
+          ].map((item, i) => (
+            <motion.li
+              key={i}
+              initial={{ opacity: 0, x: -8 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.06 }}
+              className="flex items-start gap-3 text-white/70 text-sm sm:text-base"
+            >
+              <CheckCircle2 size={18} className="text-brand-gold shrink-0 mt-0.5" />
+              <span>{item}</span>
+            </motion.li>
+          ))}
+        </ul>
       </section>
 
       {/* Featured Project Section */}

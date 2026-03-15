@@ -1,24 +1,52 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import { Menu, X } from 'lucide-react';
 
+const SCROLL_THRESHOLD = 70;
+const THROTTLE_MS = 120;
+
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [navbarHidden, setNavbarHidden] = useState(false);
+  const lastScrollY = useRef(0);
+  const lastRun = useRef(0);
   const location = useLocation();
   const isPortal = location.pathname === '/daga';
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const now = Date.now();
+      if (now - lastRun.current < THROTTLE_MS) return;
+      lastRun.current = now;
+      const y = window.scrollY;
+      if (y > SCROLL_THRESHOLD) {
+        setNavbarHidden(y > lastScrollY.current);
+      } else {
+        setNavbarHidden(false);
+      }
+      lastScrollY.current = y;
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   if (isPortal) return null;
 
   const navLinks = [
     { name: 'Home', path: '/' },
-    { name: 'Services', path: '/services' },
     { name: 'About', path: '/about' },
+    { name: 'Services', path: '/services' },
   ];
 
   return (
     <>
-      <nav className="fixed top-0 w-full z-50 bg-black/50 backdrop-blur-xl border-b border-white/5 px-6 py-4 flex justify-between items-center">
+      <motion.nav
+        initial={false}
+        animate={{ y: navbarHidden ? '-100%' : 0 }}
+        transition={{ duration: 0.28, ease: [0.25, 0.46, 0.45, 0.94] }}
+        className="fixed top-0 w-full z-50 bg-black/50 backdrop-blur-xl border-b border-white/5 px-6 py-4 flex justify-between items-center"
+      >
         <Link to="/" className="flex items-center gap-3 group">
           <img 
             src="/dpeipics/DpeiLogo.png" 
@@ -57,7 +85,7 @@ export default function Navbar() {
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
-      </nav>
+      </motion.nav>
 
       {/* Mobile Menu Overlay */}
       <AnimatePresence>

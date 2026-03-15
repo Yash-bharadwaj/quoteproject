@@ -13,19 +13,22 @@ import {
   X,
   ChevronLeft,
   ChevronRight,
-  Images
+  Images,
+  Award,
+  Users
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { COMPANY_DETAILS } from '../constants';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import Sparkles from '../components/Sparkles';
 
-const services = [
-  { icon: <Hotel size={24} />, title: "Hotels", desc: "Luxury hospitality interiors that define guest experiences.", link: "/services" },
-  { icon: <Home size={24} />, title: "Residences", desc: "Crafting personal sanctuaries with bespoke design elements.", link: "/services" },
-  { icon: <Building2 size={24} />, title: "Corporate Offices", desc: "Productive workspaces that reflect your brand identity.", link: "/services" },
-  { icon: <Store size={24} />, title: "Commercial Outlets", desc: "Dynamic retail spaces designed to engage and convert.", link: "/services" },
-  { icon: <Monitor size={24} />, title: "Kiosks", desc: "Functional and eye-catching modular display solutions.", link: "/services" },
+const expertiseServices = [
+  { icon: <Hotel size={28} />, title: "Hotels & Hospitality", desc: "Luxury interiors that define guest experiences.", points: ["Lobbies & reception", "Guest suites", "Dining & wellness spaces"], link: "/services" },
+  { icon: <Home size={28} />, title: "Residences", desc: "Bespoke homes that reflect your lifestyle.", points: ["Custom furniture", "Kitchen & wardrobes", "Smart home integration"], link: "/services" },
+  { icon: <Building2 size={28} />, title: "Corporate Offices", desc: "Workspaces that boost productivity and brand.", points: ["Executive suites", "Collaboration zones", "Ergonomic planning"], link: "/services" },
+  { icon: <Store size={28} />, title: "Commercial & Retail", desc: "Spaces that engage customers and drive sales.", points: ["Showrooms", "Visual merchandising", "Customer flow design"], link: "/services" },
+  { icon: <Monitor size={28} />, title: "Kiosks & Modular", desc: "Flexible, high-impact display solutions.", points: ["Exhibition stalls", "Mall kiosks", "Pop-up units"], link: "/services" },
 ];
 
 // 3 best landscape/wide images for the hero carousel (1600×1200 — highest res, widest)
@@ -105,10 +108,14 @@ function Counter({ value, suffix }: { value: number; suffix: string }) {
   );
 }
 
+const WHATSAPP_PHONE = "919848132615";
+
 export default function LandingPage() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [direction, setDirection] = useState(1);
   const [galleryIndex, setGalleryIndex] = useState<number | null>(null);
+  const [showInquiryPopup, setShowInquiryPopup] = useState(false);
+  const [inquiryForm, setInquiryForm] = useState({ name: "", project: "", message: "" });
 
   const openGallery = (i: number) => setGalleryIndex(i);
   const closeGallery = () => setGalleryIndex(null);
@@ -122,6 +129,44 @@ export default function LandingPage() {
     }, 5000);
     return () => clearInterval(timer);
   }, []);
+
+  useEffect(() => {
+    if (sessionStorage.getItem("dpei-inquiry-seen") === "1") return;
+    const t = setTimeout(() => setShowInquiryPopup(true), 10000);
+    return () => clearTimeout(t);
+  }, []);
+
+  const closeInquiryPopup = () => {
+    setShowInquiryPopup(false);
+    sessionStorage.setItem("dpei-inquiry-seen", "1");
+  };
+
+  const handleInquirySubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const { name, project, message } = inquiryForm;
+    const text = [
+      "Hi, I'd like to discuss a project.",
+      name.trim() && `Name: ${name.trim()}`,
+      project && `Project: ${project}`,
+      message.trim() && message.trim(),
+    ].filter(Boolean).join("\n");
+    window.open(`https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(text)}`, "_blank");
+    setInquiryForm({ name: "", project: "", message: "" });
+    closeInquiryPopup();
+  };
+
+  const projectOptions = [
+    "Hotels & Hospitality",
+    "Residence / Home",
+    "Corporate Office",
+    "Commercial / Retail",
+    "Kiosk / Modular",
+    "Villa",
+    "Apartment",
+    "Restaurant / Cafe",
+    "Showroom",
+    "Other",
+  ];
 
   const goTo = (index: number) => {
     setDirection(index > currentSlide ? 1 : -1);
@@ -158,6 +203,7 @@ export default function LandingPage() {
           <div className="absolute inset-0 bg-black/55" />
           <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-[#0A0A0A]" />
         </div>
+        <Sparkles />
 
         {/* Hero content */}
         <div className="relative z-10 text-center px-6 max-w-5xl">
@@ -222,18 +268,214 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Gallery Section */}
-      <section id="gallery" className="py-20 sm:py-32 px-6 max-w-7xl mx-auto">
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-12 sm:mb-16">
-          <div>
-            <h2 className="text-[10px] sm:text-xs uppercase tracking-[0.4em] text-brand-gold font-bold mb-4">Our Work</h2>
-            <h3 className="text-3xl sm:text-5xl font-serif font-bold leading-tight">
-              Monastery Hotel,{' '}
-              <span className="italic font-light text-white/50">Hyderabad.</span>
-            </h3>
-            <p className="text-white/40 mt-4 text-sm sm:text-base max-w-xl">
-              Complete interior architecture — from grand lobby to bespoke guest suites.
+      {/* Stats Section */}
+      <section className="py-20 sm:py-28 px-6 border-y border-white/5">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-12 sm:gap-20">
+            {[
+              { label: "Years of Experience", value: "15", suffix: "+" },
+              { label: "Projects Delivered", value: "500", suffix: "+" },
+              { label: "Client Satisfaction", value: "100", suffix: "%" },
+              { label: "Premium Partners", value: "50", suffix: "+" }
+            ].map((stat, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="text-center group"
+              >
+                <div className="text-4xl sm:text-6xl font-serif font-bold mb-4 flex items-center justify-center text-white group-hover:text-brand-gold transition-colors">
+                  <Counter value={parseInt(stat.value)} suffix={stat.suffix} />
+                </div>
+                <p className="text-[10px] sm:text-xs uppercase tracking-[0.3em] font-bold text-white/30 group-hover:text-white/60 transition-colors">
+                  {stat.label}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Our Expertise — redesigned for clarity & mobile UX */}
+      <section id="services" className="py-16 sm:py-24 md:py-32 px-4 sm:px-6 max-w-7xl mx-auto">
+        <div className="mb-12 sm:mb-16 md:mb-20">
+          <p className="text-[10px] sm:text-xs uppercase tracking-[0.35em] text-brand-gold font-bold mb-3 sm:mb-4">Our Expertise</p>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif font-bold leading-tight mb-4 sm:mb-6 max-w-3xl">
+            What We Provide.
+          </h2>
+          <p className="text-white/50 text-base sm:text-lg max-w-2xl leading-relaxed mb-8 sm:mb-10">
+            End-to-end interior design: from concept and material selection to project handover. We design <strong className="text-white/70">hotels, homes, offices, retail spaces, and modular kiosks</strong>—with full conceptual planning, material curation, and project management.
+          </p>
+          <div className="flex flex-wrap gap-x-6 gap-y-2 sm:gap-y-3 text-[11px] sm:text-xs uppercase tracking-widest text-white/50">
+            {["Conceptual planning", "Material curation", "Project management"].map((item) => (
+              <span key={item} className="flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-brand-gold shrink-0" />
+                {item}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 md:gap-6">
+          {expertiseServices.map((s, i) => (
+            <motion.article
+              key={i}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-24px" }}
+              transition={{ duration: 0.35, delay: i * 0.06 }}
+              className="group flex flex-col bg-white/[0.06] border border-white/[0.08] rounded-2xl sm:rounded-3xl p-5 sm:p-6 md:p-7 hover:bg-white/[0.08] hover:border-white/[0.12] transition-all duration-300"
+            >
+              <div className="flex items-start justify-between gap-3 mb-4 sm:mb-5">
+                <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl bg-white/10 flex items-center justify-center text-white group-hover:bg-brand-gold group-hover:text-black transition-colors duration-300 shrink-0">
+                  {s.icon}
+                </div>
+                <span className="text-[10px] sm:text-xs font-bold text-white/30 tabular-nums">{String(i + 1).padStart(2, "0")}</span>
+              </div>
+              <h3 className="text-lg sm:text-xl font-serif font-bold text-white mb-2 sm:mb-3 leading-tight">{s.title}</h3>
+              <p className="text-white/50 text-sm sm:text-base leading-relaxed mb-4 sm:mb-5 flex-grow">{s.desc}</p>
+              <ul className="space-y-2 sm:space-y-2.5 mb-5 sm:mb-6" aria-label={`${s.title} — key areas`}>
+                {s.points.map((point, j) => (
+                  <li key={j} className="flex items-center gap-2.5 text-white/60 text-xs sm:text-sm">
+                    <span className="w-1 h-1 rounded-full bg-brand-gold/80 shrink-0" />
+                    {point}
+                  </li>
+                ))}
+              </ul>
+              <Link
+                to={s.link}
+                className="inline-flex items-center gap-2 min-h-[44px] sm:min-h-0 py-2.5 text-[10px] sm:text-xs uppercase tracking-widest font-bold text-brand-gold hover:text-white transition-colors"
+              >
+                Learn more <ArrowRight size={14} className="shrink-0" />
+              </Link>
+            </motion.article>
+          ))}
+        </div>
+
+        <div className="mt-12 sm:mt-16 text-center">
+          <Link
+            to="/services"
+            className="inline-flex items-center justify-center gap-2 min-h-[48px] px-6 sm:px-8 py-3 rounded-full border border-white/20 font-bold text-sm sm:text-base hover:bg-white hover:text-black hover:border-white transition-all"
+          >
+            View all services <ArrowRight size={18} className="shrink-0" />
+          </Link>
+        </div>
+      </section>
+
+      {/* About Section - The Visionary (same as About page) */}
+      <section id="about" className="py-20 sm:py-28 bg-white/5">
+        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-20 items-start">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="relative aspect-[4/5] rounded-2xl sm:rounded-3xl overflow-hidden border border-white/10"
+          >
+            <img
+              src="/dpeipics/DagaSrinivas.png"
+              alt={COMPANY_DETAILS.founder}
+              className="w-full h-full object-cover object-[center_35%]"
+              referrerPolicy="no-referrer"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
+            <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8">
+              <p className="text-brand-gold text-[10px] sm:text-xs uppercase tracking-[0.3em] font-bold mb-1">Founder & Lead Designer</p>
+              <p className="text-xl sm:text-2xl md:text-3xl font-serif font-bold tracking-tight">{COMPANY_DETAILS.founder}</p>
+            </div>
+          </motion.div>
+
+          <div className="lg:pt-4">
+            <p className="text-[10px] sm:text-xs uppercase tracking-[0.35em] text-brand-gold font-bold mb-3">The Visionary</p>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif font-bold text-white tracking-tight">
+              {COMPANY_DETAILS.founder}
+            </h2>
+            <div className="h-1 w-16 bg-brand-gold rounded-full my-6" />
+
+            <p className="text-white/60 text-base sm:text-lg leading-relaxed mb-6">
+              With over 15 years in interior architecture, {COMPANY_DETAILS.founder} has built DEE PIESS from the ground up. Based in Secunderabad, he leads every project from concept to handover — working closely with clients, craftsmen, and vendors to deliver spaces that are both beautiful and built to last.
             </p>
+            <p className="text-white/60 text-base sm:text-lg leading-relaxed mb-8">
+              He believes every space has a soul. His job is to find it and bring it to life through clear design, the right materials, and strict attention to detail. No shortcuts, no compromise on finish — that's the standard he has set for the firm and for everyone who works with him.
+            </p>
+
+            <div className="space-y-3 mb-10">
+              {[
+                "Hands-on on every project from start to finish",
+                "Strong focus on quality materials and craftsmanship",
+                "Known for on-time delivery and clear communication",
+              ].map((line, i) => (
+                <div key={i} className="flex items-center gap-3 text-white/70 text-sm sm:text-base">
+                  <div className="w-1.5 h-1.5 rounded-full bg-brand-gold shrink-0" />
+                  <span>{line}</span>
+                </div>
+              ))}
+            </div>
+
+            <blockquote className="border-l-2 border-brand-gold pl-5 py-2 text-white/50 italic text-sm sm:text-base mb-10">
+              "We don't just design spaces — we build places people want to live and work in."
+            </blockquote>
+
+            <div className="flex flex-wrap gap-8 sm:gap-12 pt-4 border-t border-white/10">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center">
+                  <Award className="text-brand-gold" size={22} />
+                </div>
+                <div>
+                  <p className="text-2xl font-serif font-bold text-white">500+</p>
+                  <p className="text-[10px] uppercase tracking-widest text-white/40 font-bold">Projects</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center">
+                  <Users className="text-brand-gold" size={22} />
+                </div>
+                <div>
+                  <p className="text-2xl font-serif font-bold text-white">200+</p>
+                  <p className="text-[10px] uppercase tracking-widest text-white/40 font-bold">Clients</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-10">
+              <Link to="/about" className="inline-flex items-center gap-2 bg-white text-black px-8 py-4 rounded-full font-bold hover:bg-brand-gold transition-all text-sm sm:text-base">
+                Read Our Story <ArrowRight size={18} />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Gallery Section - Our Work */}
+      <section id="gallery" className="py-20 sm:py-32 px-6 max-w-7xl mx-auto">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12 sm:mb-16">
+          <div className="relative inline-block">
+            <motion.h2
+              initial={{ opacity: 0, y: 8 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4 }}
+              className="text-2xl sm:text-3xl font-serif font-bold tracking-tight text-white relative z-0"
+            >
+              Our Work
+              <motion.span
+                className="block h-0.5 sm:h-1 bg-brand-gold mt-2 origin-left"
+                initial={{ scaleX: 0 }}
+                whileInView={{ scaleX: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.15 }}
+              />
+            </motion.h2>
+            <div
+              className="absolute -bottom-2 left-0 right-0 h-14 pointer-events-none z-[-1]"
+              style={{
+                background: 'radial-gradient(ellipse 80% 50% at 50% 100%, rgba(197,160,89,0.12), transparent 70%)',
+                filter: 'blur(10px)',
+              }}
+              aria-hidden
+            />
           </div>
           <div className="flex items-center gap-2 text-white/25 shrink-0">
             <Images size={16} />
@@ -289,8 +531,10 @@ export default function LandingPage() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.22 }}
-            className="fixed inset-0 z-50 bg-black/96 flex items-center justify-center"
+            className="fixed inset-0 z-50 bg-black/96 flex items-center justify-center cursor-pointer"
             onClick={closeGallery}
+            role="dialog"
+            aria-modal="true"
           >
             <button
               onClick={closeGallery}
@@ -320,8 +564,9 @@ export default function LandingPage() {
                 transition={{ duration: 0.18 }}
                 src={allImages[galleryIndex]}
                 alt={`DEE PIESS — Monastery Hotel ${galleryIndex + 1}`}
-                className="max-h-[80vh] max-w-[85vw] object-contain rounded-xl shadow-2xl"
+                className="max-h-[80vh] max-w-[85vw] object-contain rounded-xl shadow-2xl cursor-default"
                 onClick={(e) => e.stopPropagation()}
+                role="presentation"
               />
             </AnimatePresence>
 
@@ -351,53 +596,20 @@ export default function LandingPage() {
         )}
       </AnimatePresence>
 
-      {/* Services Section */}
-      <section id="services" className="py-20 sm:py-32 px-6 max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-20">
-          <div className="lg:col-span-1">
-            <h2 className="text-[10px] sm:text-xs uppercase tracking-[0.4em] text-brand-gold font-bold mb-6">Our Expertise</h2>
-            <h3 className="text-3xl sm:text-4xl font-serif font-bold mb-8 leading-tight">Comprehensive Design Solutions.</h3>
-            <p className="text-white/40 leading-relaxed mb-12 text-sm sm:text-base">
-              From initial concept to final handover, we provide end-to-end interior design services. Our approach integrates architectural integrity with aesthetic excellence, ensuring every square foot serves a purpose.
-            </p>
-            <div className="space-y-4 mb-12">
-              {["Conceptual Planning", "Material Curation", "Project Management"].map((item) => (
-                <div key={item} className="flex items-center gap-3 text-xs uppercase tracking-widest text-white/60">
-                  <div className="w-1.5 h-1.5 rounded-full bg-brand-gold" />
-                  {item}
-                </div>
-              ))}
-            </div>
-            <Link to="/services" className="inline-flex gap-4 group">
-              <div className="w-12 h-px bg-white/20 self-center group-hover:bg-brand-gold transition-colors" />
-              <span className="text-[10px] uppercase tracking-widest font-bold text-white/40 group-hover:text-white transition-colors">View Detailed Services</span>
-            </Link>
-          </div>
-          <div className="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
-            {services.map((s, i) => (
-              <motion.div
-                key={i}
-                whileHover={{ y: -10 }}
-                className="bg-white/5 border border-white/5 p-6 sm:p-8 rounded-2xl sm:rounded-3xl hover:bg-white/10 transition-all group"
-              >
-                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-white/10 rounded-xl sm:rounded-2xl flex items-center justify-center mb-6 group-hover:bg-brand-gold group-hover:text-black transition-colors">
-                  {s.icon}
-                </div>
-                <h4 className="text-lg sm:text-xl font-serif font-bold mb-3">{s.title}</h4>
-                <p className="text-white/40 text-xs sm:text-sm leading-relaxed mb-6">{s.desc}</p>
-                <Link to={s.link} className="text-[10px] uppercase tracking-widest font-bold text-brand-gold opacity-0 group-hover:opacity-100 transition-opacity">Explore Expertise</Link>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Process Section */}
       <section className="py-20 sm:py-32 px-6 bg-[#0F0F0F]">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-20">
+          <div className="text-center mb-20 relative">
             <h2 className="text-[10px] sm:text-xs uppercase tracking-[0.4em] text-brand-gold font-bold mb-6">How We Work</h2>
-            <h3 className="text-3xl sm:text-5xl font-serif font-bold leading-tight">A Meticulous Journey <br /> From Concept to Reality.</h3>
+            <h3 className="text-3xl sm:text-5xl font-serif font-bold leading-tight relative z-0">From Idea to Finished Space.</h3>
+            <div
+              className="absolute left-1/2 -translate-x-1/2 -bottom-4 w-full max-w-xl h-20 pointer-events-none z-[-1]"
+              style={{
+                background: 'radial-gradient(ellipse 80% 50% at 50% 100%, rgba(197,160,89,0.1), transparent 70%)',
+                filter: 'blur(12px)',
+              }}
+              aria-hidden
+            />
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
@@ -412,84 +624,6 @@ export default function LandingPage() {
                 <p className="text-white/40 text-sm leading-relaxed">{p.desc}</p>
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Stats Section */}
-      <section className="py-20 sm:py-28 px-6 border-y border-white/5">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-12 sm:gap-20">
-            {[
-              { label: "Years of Experience", value: "15", suffix: "+" },
-              { label: "Projects Delivered", value: "250", suffix: "+" },
-              { label: "Client Satisfaction", value: "100", suffix: "%" },
-              { label: "Premium Partners", value: "50", suffix: "+" }
-            ].map((stat, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="text-center group"
-              >
-                <div className="text-4xl sm:text-6xl font-serif font-bold mb-4 flex items-center justify-center text-white group-hover:text-brand-gold transition-colors">
-                  <Counter value={parseInt(stat.value)} suffix={stat.suffix} />
-                </div>
-                <p className="text-[10px] sm:text-xs uppercase tracking-[0.3em] font-bold text-white/30 group-hover:text-white/60 transition-colors">
-                  {stat.label}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* About Section */}
-      <section id="about" className="py-20 sm:py-32 bg-white/5">
-        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-          <div className="relative aspect-square rounded-2xl sm:rounded-3xl overflow-hidden">
-            <img
-              src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=1000"
-              alt="Founder"
-              className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
-              referrerPolicy="no-referrer"
-            />
-            <div className="absolute bottom-4 left-4 sm:bottom-8 sm:left-8 bg-black/80 backdrop-blur-xl p-4 sm:p-6 rounded-xl sm:rounded-2xl border border-white/10">
-              <p className="text-brand-gold text-[8px] sm:text-[10px] uppercase tracking-widest font-bold mb-1">Founder</p>
-              <p className="text-lg sm:text-xl font-serif font-bold">{COMPANY_DETAILS.founder}</p>
-            </div>
-          </div>
-          <div>
-            <h2 className="text-[10px] sm:text-xs uppercase tracking-[0.4em] text-brand-gold font-bold mb-6">The Visionary</h2>
-            <h3 className="text-3xl sm:text-5xl font-serif font-bold mb-8 leading-tight">Legacy of Excellence.</h3>
-            <div className="space-y-6 text-white/50 leading-relaxed text-base sm:text-lg">
-              <p>
-                Under the leadership of {COMPANY_DETAILS.founder}, DEE PIESS has grown into a premier interior architecture firm known for its meticulous attention to detail and uncompromising quality. We specialize in creating environments that are not only aesthetically stunning but also functionally superior.
-              </p>
-              <p>
-                Our philosophy is simple: we don't just design spaces; we create environments that enhance the lives of those who inhabit them. By integrating cutting-edge technology with traditional craftsmanship, we deliver projects that stand the test of time.
-              </p>
-              <p className="italic text-brand-gold/80">
-                "Design is not just what it looks like and feels like. Design is how it works."
-              </p>
-            </div>
-            <div className="mt-12 flex flex-col sm:flex-row gap-8">
-              <Link to="/about" className="bg-white text-black px-8 py-4 rounded-full font-bold flex items-center justify-center gap-2 hover:bg-brand-gold transition-all text-sm sm:text-base">
-                Read Our Story <ArrowRight size={18} />
-              </Link>
-              <div className="flex gap-8">
-                <div>
-                  <p className="text-2xl sm:text-3xl font-serif font-bold mb-1">15+</p>
-                  <p className="text-[8px] sm:text-[10px] uppercase tracking-widest text-white/30 font-bold">Years Experience</p>
-                </div>
-                <div>
-                  <p className="text-2xl sm:text-3xl font-serif font-bold mb-1">500+</p>
-                  <p className="text-[8px] sm:text-[10px] uppercase tracking-widest text-white/30 font-bold">Projects Delivered</p>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </section>
@@ -517,7 +651,7 @@ export default function LandingPage() {
                   </div>
                   <div>
                     <p className="text-[8px] sm:text-[10px] uppercase tracking-widest font-bold text-black/40 mb-1">Phone</p>
-                    <p className="font-medium text-sm sm:text-base">{COMPANY_DETAILS.phone}</p>
+                    <a href="tel:+919848132615" className="font-medium text-sm sm:text-base hover:underline block">{COMPANY_DETAILS.phone}</a>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
@@ -526,13 +660,13 @@ export default function LandingPage() {
                   </div>
                   <div>
                     <p className="text-[8px] sm:text-[10px] uppercase tracking-widest font-bold text-black/40 mb-1">Email</p>
-                    <p className="font-medium text-sm sm:text-base">{COMPANY_DETAILS.email}</p>
+                    <a href={`mailto:${COMPANY_DETAILS.email}`} className="font-medium text-sm sm:text-base hover:underline block">{COMPANY_DETAILS.email}</a>
                   </div>
                 </div>
               </div>
             </div>
             <div className="bg-black/5 p-6 sm:p-8 rounded-3xl sm:rounded-4xl">
-              <form className="space-y-4 sm:space-y-6">
+              <form className="space-y-4 sm:space-y-6" onSubmit={(e) => e.preventDefault()}>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                   <div className="space-y-2">
                     <label className="text-[8px] sm:text-[10px] uppercase tracking-widest font-bold text-black/40 ml-1">Name</label>
@@ -564,6 +698,98 @@ export default function LandingPage() {
           </div>
         </div>
       </section>
+
+      {/* Inquiry popup — appears after 10s, sends to WhatsApp */}
+      <AnimatePresence>
+        {showInquiryPopup && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
+            onClick={closeInquiryPopup}
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.96 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.96 }}
+              transition={{ type: "spring", damping: 25, stiffness: 300 }}
+              className="bg-[#0A0A0A] border border-white/10 rounded-2xl shadow-2xl w-full max-w-sm overflow-hidden"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="px-5 pt-5 pb-4 border-b border-white/10">
+                <div className="flex items-start justify-between gap-3">
+                  <h3 className="text-lg font-serif font-bold text-white tracking-tight">
+                    Quick inquiry
+                    <motion.span
+                      className="block h-0.5 bg-brand-gold mt-1.5 origin-left"
+                      initial={{ scaleX: 0 }}
+                      animate={{ scaleX: 1 }}
+                      transition={{ duration: 0.4, delay: 0.1 }}
+                    />
+                  </h3>
+                  <button
+                    type="button"
+                    onClick={closeInquiryPopup}
+                    className="p-1.5 text-white/50 hover:text-white rounded-lg transition-colors shrink-0"
+                    aria-label="Close"
+                  >
+                    <X size={18} />
+                  </button>
+                </div>
+              </div>
+              <form onSubmit={handleInquirySubmit} className="p-5 space-y-4">
+                <div>
+                  <label className="block text-[10px] uppercase tracking-widest text-white/50 font-bold mb-1.5">Name</label>
+                  <input
+                    type="text"
+                    value={inquiryForm.name}
+                    onChange={(e) => setInquiryForm((p) => ({ ...p, name: e.target.value }))}
+                    placeholder="Your name"
+                    required
+                    className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white placeholder-white/30 focus:outline-none focus:ring-1 focus:ring-brand-gold focus:border-brand-gold"
+                  />
+                </div>
+                <div>
+                  <label className="block text-[10px] uppercase tracking-widest text-white/50 font-bold mb-1.5">Project type</label>
+                  <select
+                    value={inquiryForm.project}
+                    onChange={(e) => setInquiryForm((p) => ({ ...p, project: e.target.value }))}
+                    required
+                    className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white focus:outline-none focus:ring-1 focus:ring-brand-gold focus:border-brand-gold appearance-none cursor-pointer [&>option]:bg-[#0A0A0A] [&>option]:text-white"
+                  >
+                    <option value="">Select project type</option>
+                    {projectOptions.map((opt) => (
+                      <option key={opt} value={opt}>{opt}</option>
+                    ))}
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-[10px] uppercase tracking-widest text-white/50 font-bold mb-1.5">Message <span className="text-white/30 font-normal normal-case">(optional)</span></label>
+                  <select
+                    value={inquiryForm.message}
+                    onChange={(e) => setInquiryForm((p) => ({ ...p, message: e.target.value }))}
+                    className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white focus:outline-none focus:ring-1 focus:ring-brand-gold focus:border-brand-gold appearance-none cursor-pointer [&>option]:bg-[#0A0A0A] [&>option]:text-white"
+                  >
+                    <option value="">—</option>
+                    <option value="Need a quote">Need a quote</option>
+                    <option value="Schedule site visit">Schedule site visit</option>
+                    <option value="Discuss budget & timeline">Discuss budget & timeline</option>
+                    <option value="General inquiry">General inquiry</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+                <button
+                  type="submit"
+                  className="w-full py-3 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm flex items-center justify-center gap-2 transition-colors"
+                >
+                  Send via WhatsApp
+                </button>
+              </form>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <Footer />
     </div>

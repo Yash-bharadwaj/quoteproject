@@ -2,7 +2,7 @@ export const COMPANY_DETAILS = {
   name: "DEE PIESS",
   tagline: "INTERIOR PROJECTS",
   logoUrl: "/dpeipics/DpeiLogo.png",
-  address: "Shop No. 6-7-73, C-Block 108, Bansilalpet, Secunderabad - 500003",
+  address: "6-7-21 D Block Bansilalpet R P Road Secunderabad",
   phone: "040-27536209 / 9848132615",
   email: "dpei.projects@gmail.com",
   gstin: "36AAALC1234A1Z5", // Placeholder GST, update if needed
