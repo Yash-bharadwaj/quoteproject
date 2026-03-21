@@ -302,7 +302,9 @@ export default function QuotationGenerator() {
       `--------------------------------\n\n` +
       `*PAYMENT DETAILS:*\n` +
       `Bank: ${COMPANY_DETAILS.bankDetails.bankName}\n` +
+      `A/c Name: ${COMPANY_DETAILS.bankDetails.accountName}\n` +
       `A/c No: ${COMPANY_DETAILS.bankDetails.accountNumber}\n` +
+      `Branch: ${COMPANY_DETAILS.bankDetails.branch}\n` +
       `IFSC: ${COMPANY_DETAILS.bankDetails.ifsc}\n` +
       `PhonePe: ${COMPANY_DETAILS.bankDetails.phonePe}\n` +
       `G-Pay: ${COMPANY_DETAILS.bankDetails.googlePay}\n\n` +

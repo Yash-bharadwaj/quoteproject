@@ -159,6 +159,7 @@ const PDFPreview = forwardRef<HTMLDivElement, PDFPreviewProps>(({ data, forCaptu
                 <div><span style={{ fontWeight: 600, color: '#57534e' }}>Bank:</span> {COMPANY_DETAILS.bankDetails.bankName}</div>
                 <div><span style={{ fontWeight: 600, color: '#57534e' }}>A/c Name:</span> {COMPANY_DETAILS.bankDetails.accountName}</div>
                 <div><span style={{ fontWeight: 600, color: '#57534e' }}>A/c No:</span> {COMPANY_DETAILS.bankDetails.accountNumber}</div>
+                <div><span style={{ fontWeight: 600, color: '#57534e' }}>Branch:</span> {COMPANY_DETAILS.bankDetails.branch}</div>
                 <div><span style={{ fontWeight: 600, color: '#57534e' }}>IFSC:</span> {COMPANY_DETAILS.bankDetails.ifsc}</div>
                 <div style={{ borderTop: '1px solid #f5f5f4', marginTop: '2px', paddingTop: '2px', display: 'flex', gap: '12px' }}>
                   <span><span style={{ fontWeight: 600, color: '#57534e' }}>PhonePe:</span> {COMPANY_DETAILS.bankDetails.phonePe}</span>

@@ -17,11 +17,11 @@ export const COMPANY_DETAILS = {
   founder: "Daga Srinivas Kumar",
   specialization: ["Hotels", "Residence", "Corporate Offices", "Commercial Outlets", "Kiosks"],
   bankDetails: {
-    bankName: "ICICI Bank", // Placeholder, update if needed
-    accountName: "DEE PIESS",
-    accountNumber: "000405001234", // Placeholder
-    ifsc: "ICIC0000004", // Placeholder
-    branch: "Secunderabad Branch",
+    bankName: "AXIS BANK",
+    accountName: "DEE PI ESS interior projects",
+    accountNumber: "915020065517920",
+    ifsc: "UTIB0000068",
+    branch: "M.G. Road, Secunderabad",
     phonePe: "9848132615",
     googlePay: "9618533654"
   },
