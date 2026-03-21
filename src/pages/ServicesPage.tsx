@@ -11,47 +11,53 @@ import {
 } from 'lucide-react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import { monasteryGalleryImages } from '../data/portfolioProjects';
+
+function monPic(part: string): string {
+  const u = monasteryGalleryImages.find((url) => url.includes(part));
+  return u ?? monasteryGalleryImages[0] ?? "";
+}
 
 const detailedServices = [
   {
     icon: <Hotel size={40} />,
-    title: "Hospitality Design",
+    title: "Hospitality Interiors",
     category: "Hotels & Resorts",
-    desc: "We create immersive guest experiences that blend luxury with operational efficiency. Our approach focuses on creating a unique sense of place while ensuring that every operational aspect—from staff flow to guest privacy—is seamlessly integrated. Our work at the Monastery Hotel, Hyderabad, stands as a testament to our hospitality expertise, where we balanced heritage aesthetics with modern luxury.",
+    desc: "We execute hotel interiors that blend luxury with day-to-day operations. Our contracting work covers lobbies, suites, dining, and back-of-house coordination so finishes, services, and guest comfort work together. Our work at the Monastery Hotel, Hyderabad, shows how we deliver heritage character with modern comfort on site.",
     features: ["Lobby & Reception Areas", "Guest Suites", "Fine Dining Restaurants", "Wellness & Spa Centers", "Operational Flow Planning", "Acoustic & Lighting Design"],
-    image: "/dpeipics/WhatsApp Image 2026-02-23 at 11.57.35.jpeg",
+    image: monPic("11.57.35"),
   },
   {
     icon: <Home size={40} />,
     title: "Residential Interiors",
     category: "Luxury Homes",
-    desc: "Transforming houses into homes that reflect the unique personality of their owners. We specialize in high-end villas and premium apartments, focusing on bespoke solutions that prioritize both comfort and sophistication. Our residential projects are characterized by a harmonious blend of textures, custom-designed furniture, and intelligent space planning that adapts to your lifestyle.",
+    desc: "We turn houses into finished homes that match how you live. For villas and premium apartments we handle civil coordination, woodwork, kitchens, wardrobes, and finishing trades so the result feels personal, comfortable, and well built.",
     features: ["Bespoke Furniture", "Smart Home Integration", "Kitchen & Wardrobe Solutions", "Landscape Integration", "Custom Art Curation", "Lighting Control Systems"],
-    image: "/dpeipics/WhatsApp Image 2026-02-23 at 11.58.24.jpeg",
+    image: monPic("11.58.24"),
   },
   {
     icon: <Building2 size={40} />,
     title: "Corporate Spaces",
     category: "Offices",
-    desc: "Designing workspaces that foster productivity and innovation while reinforcing your corporate brand identity. We understand that the modern office is more than just a place to work; it's a hub for collaboration and culture. Our designs incorporate ergonomic principles, sustainable materials, and flexible layouts that can evolve with your business needs.",
+    desc: "We deliver office interiors that support productivity and reflect your brand on the ground. From cabins and open work areas to meeting rooms and reception, we coordinate execution, services, and finishes so the space works for your team day to day.",
     features: ["Executive Suites", "Collaborative Zones", "Conference Facilities", "Ergonomic Planning", "Brand Identity Integration", "IT & AV Infrastructure"],
-    image: "/dpeipics/WhatsApp Image 2026-02-23 at 11.58.30.jpeg",
+    image: monPic("11.58.30"),
   },
   {
     icon: <Store size={40} />,
     title: "Commercial & Retail",
     category: "Outlets & Showrooms",
-    desc: "Strategic retail design that maximizes customer engagement and optimizes product display. We combine psychological insights with architectural precision to create environments that guide the customer journey and enhance brand perception. From high-end showrooms to boutique outlets, we ensure your physical space is your most powerful marketing tool.",
+    desc: "We build retail and showroom interiors that support sales and footfall. Layout, lighting, display, and finishes are executed with careful detailing so the customer journey feels clear and your brand reads well in the space.",
     features: ["Visual Merchandising", "Lighting Design", "Customer Flow Optimization", "Brand Integration", "Point of Sale Design", "Storage & Inventory Planning"],
-    image: "/dpeipics/WhatsApp Image 2026-02-23 at 11.58.33.jpeg",
+    image: monPic("11.58.33.jpeg"),
   },
   {
     icon: <Monitor size={40} />,
     title: "Modular Solutions",
     category: "Kiosks & Displays",
-    desc: "Functional, eye-catching, and modular solutions for temporary or permanent brand presence. We specialize in creating high-impact modular units that are easy to assemble, durable, and highly customizable. Whether it's a mall kiosk or an exhibition stall, our solutions are designed to stand out in high-traffic environments while maintaining brand consistency.",
+    desc: "Functional, eye-catching modular builds for exhibitions, malls, and pop-ups. We fabricate and install durable, reusable units that are quick to set up and easy to adapt so your brand stays consistent in busy venues.",
     features: ["Exhibition Stalls", "Mall Kiosks", "Pop-up Stores", "Modular Displays", "Portable Branding Units", "Integrated Digital Signage"],
-    image: "/dpeipics/WhatsApp Image 2026-02-23 at 12.00.03.jpeg",
+    image: monPic("12.00.03"),
   }
 ];
 
@@ -75,7 +81,7 @@ export default function ServicesPage() {
           transition={{ delay: 0.2 }}
           className="text-4xl sm:text-5xl md:text-7xl font-serif font-bold tracking-tighter mb-12 leading-tight"
         >
-          Design Without <br /> <span className="italic font-light text-white/60">Boundaries.</span>
+          Interiors Built <br /> <span className="italic font-light text-white/60">On Site.</span>
         </motion.h1>
       </section>
 

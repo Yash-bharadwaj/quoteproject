@@ -18,7 +18,7 @@ export default function WhatsAppWidget() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const phone = "919848132615"; // Primary mobile for WhatsApp
+    const phone = COMPANY_DETAILS.phoneWhatsappWa;
     const text = `*New Inquiry from Website*\n\n*Name:* ${formData.name}\n*Project:* ${formData.projectType}\n*Message:* ${formData.message}`;
     window.open(`https://wa.me/${phone}?text=${encodeURIComponent(text)}`, '_blank');
     setIsOpen(false);

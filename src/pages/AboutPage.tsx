@@ -4,52 +4,9 @@ import { COMPANY_DETAILS } from '../constants';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { Award, Users, History, Globe, X, ChevronLeft, ChevronRight, CheckCircle2 } from 'lucide-react';
+import { monasteryGalleryImages } from '../data/portfolioProjects';
 
-const monasteryImages = [
-  "/dpeipics/WhatsApp Image 2026-02-23 at 11.57.35.jpeg",
-  "/dpeipics/WhatsApp Image 2026-02-23 at 11.57.36 (1).jpeg",
-  "/dpeipics/WhatsApp Image 2026-02-23 at 11.57.36.jpeg",
-  "/dpeipics/WhatsApp Image 2026-02-23 at 11.57.37 (1).jpeg",
-  "/dpeipics/WhatsApp Image 2026-02-23 at 11.57.37 (2).jpeg",
-  "/dpeipics/WhatsApp Image 2026-02-23 at 11.57.37.jpeg",
-  "/dpeipics/WhatsApp Image 2026-02-23 at 11.57.38 (1).jpeg",
-  "/dpeipics/WhatsApp Image 2026-02-23 at 11.57.38 (2).jpeg",
-  "/dpeipics/WhatsApp Image 2026-02-23 at 11.57.38.jpeg",
-  "/dpeipics/WhatsApp Image 2026-02-23 at 11.57.39 (1).jpeg",
-  "/dpeipics/WhatsApp Image 2026-02-23 at 11.57.39 (2).jpeg",
-  "/dpeipics/WhatsApp Image 2026-02-23 at 11.57.39.jpeg",
-  "/dpeipics/WhatsApp Image 2026-02-23 at 11.57.40 (1).jpeg",
-  "/dpeipics/WhatsApp Image 2026-02-23 at 11.57.40.jpeg",
-  "/dpeipics/WhatsApp Image 2026-02-23 at 11.57.41 (1).jpeg",
-  "/dpeipics/WhatsApp Image 2026-02-23 at 11.57.41 (2).jpeg",
-  "/dpeipics/WhatsApp Image 2026-02-23 at 11.57.41.jpeg",
-  "/dpeipics/WhatsApp Image 2026-02-23 at 11.57.42 (1).jpeg",
-  "/dpeipics/WhatsApp Image 2026-02-23 at 11.57.42 (2).jpeg",
-  "/dpeipics/WhatsApp Image 2026-02-23 at 11.57.42.jpeg",
-  "/dpeipics/WhatsApp Image 2026-02-23 at 11.57.43.jpeg",
-  "/dpeipics/WhatsApp Image 2026-02-23 at 11.58.24.jpeg",
-  "/dpeipics/WhatsApp Image 2026-02-23 at 11.58.25.jpeg",
-  "/dpeipics/WhatsApp Image 2026-02-23 at 11.58.30.jpeg",
-  "/dpeipics/WhatsApp Image 2026-02-23 at 11.58.31 (1).jpeg",
-  "/dpeipics/WhatsApp Image 2026-02-23 at 11.58.31.jpeg",
-  "/dpeipics/WhatsApp Image 2026-02-23 at 11.58.32 (1).jpeg",
-  "/dpeipics/WhatsApp Image 2026-02-23 at 11.58.32 (2).jpeg",
-  "/dpeipics/WhatsApp Image 2026-02-23 at 11.58.32.jpeg",
-  "/dpeipics/WhatsApp Image 2026-02-23 at 11.58.33 (1).jpeg",
-  "/dpeipics/WhatsApp Image 2026-02-23 at 11.58.33 (2).jpeg",
-  "/dpeipics/WhatsApp Image 2026-02-23 at 11.58.33.jpeg",
-  "/dpeipics/WhatsApp Image 2026-02-23 at 11.58.34 (1).jpeg",
-  "/dpeipics/WhatsApp Image 2026-02-23 at 11.58.34 (2).jpeg",
-  "/dpeipics/WhatsApp Image 2026-02-23 at 11.58.34.jpeg",
-  "/dpeipics/WhatsApp Image 2026-02-23 at 11.58.35 (1).jpeg",
-  "/dpeipics/WhatsApp Image 2026-02-23 at 11.58.35 (2).jpeg",
-  "/dpeipics/WhatsApp Image 2026-02-23 at 11.58.35.jpeg",
-  "/dpeipics/WhatsApp Image 2026-02-23 at 12.00.03.jpeg",
-  "/dpeipics/WhatsApp Image 2026-02-23 at 12.00.04 (1).jpeg",
-  "/dpeipics/WhatsApp Image 2026-02-23 at 12.00.04 (2).jpeg",
-  "/dpeipics/WhatsApp Image 2026-02-23 at 12.00.04.jpeg",
-  "/dpeipics/WhatsApp Image 2026-02-23 at 12.00.05.jpeg",
-];
+const monasteryImages = monasteryGalleryImages;
 
 export default function AboutPage() {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
@@ -86,8 +43,14 @@ export default function AboutPage() {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
             <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8">
-              <p className="text-brand-gold text-[10px] sm:text-xs uppercase tracking-[0.3em] font-bold mb-1">Founder & Lead Designer</p>
+              <p className="text-brand-gold text-[10px] sm:text-xs uppercase tracking-[0.3em] font-bold mb-1">Founder & Contractor</p>
               <p className="text-xl sm:text-2xl md:text-3xl font-serif font-bold tracking-tight">{COMPANY_DETAILS.founder}</p>
+              <a
+                href={`tel:+${COMPANY_DETAILS.phoneWhatsappWa}`}
+                className="mt-2 block text-sm sm:text-base text-white/75 hover:text-brand-gold transition-colors tracking-wide"
+              >
+                {COMPANY_DETAILS.phoneWhatsappDisplay}
+              </a>
             </div>
           </motion.div>
 
@@ -99,10 +62,10 @@ export default function AboutPage() {
             <div className="h-1 w-16 bg-brand-gold rounded-full my-6" />
 
             <p className="text-white/60 text-base sm:text-lg leading-relaxed mb-6">
-              With over 15 years in interior architecture, {COMPANY_DETAILS.founder} has built DEE PIESS from the ground up. Based in Secunderabad, he leads every project from concept to handover — working closely with clients, craftsmen, and vendors to deliver spaces that are both beautiful and built to last.
+              With over 15 years as an interior contractor, {COMPANY_DETAILS.founder} has built DEE PIESS from the ground up. Based in Secunderabad, he leads every project from planning to handover — working closely with clients, craftsmen, and vendors to deliver spaces that are both beautiful and built to last.
             </p>
             <p className="text-white/60 text-base sm:text-lg leading-relaxed mb-8">
-              He believes every space has a soul. His job is to find it and bring it to life through clear design, the right materials, and strict attention to detail. No shortcuts, no compromise on finish — that’s the standard he has set for the firm and for everyone who works with him.
+              He believes every space has a soul. His job is to find it and bring it to life through solid planning, the right materials, and strict attention to detail on site. No shortcuts, no compromise on finish — that’s the standard he has set for the firm and for everyone who works with him.
             </p>
 
             <div className="space-y-3 mb-10">
@@ -119,7 +82,7 @@ export default function AboutPage() {
             </div>
 
             <blockquote className="border-l-2 border-brand-gold pl-5 py-2 text-white/50 italic text-sm sm:text-base mb-10">
-              “We don’t just design spaces — we build places people want to live and work in.”
+              “We deliver complete interiors — places people want to live and work in.”
             </blockquote>
 
             <div className="flex flex-wrap gap-8 sm:gap-12 pt-4 border-t border-white/10">
@@ -217,14 +180,14 @@ export default function AboutPage() {
           <h2 className="text-[10px] sm:text-xs uppercase tracking-[0.4em] text-brand-gold font-bold mb-6">Masterpiece</h2>
           <h3 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold">Monastery Hotel, Hyderabad</h3>
           <p className="text-white/40 mt-4 text-sm sm:text-base max-w-2xl mx-auto">
-            Our most ambitious project — blending traditional spiritual aesthetics with modern luxury. Complete interior architecture from grand lobby to bespoke guest suites.
+            Our most ambitious project — blending traditional spiritual aesthetics with modern luxury. Complete interior fit-out and finishing from grand lobby to bespoke guest suites.
           </p>
         </div>
 
         {/* Project Details */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-16">
           {[
-            { label: "Scope", value: "Complete Interior Architecture" },
+            { label: "Scope", value: "Complete interior fit-out" },
             { label: "Services", value: "Furniture · Lighting · Material Sourcing" },
             { label: "Location", value: "Hyderabad, Telangana" },
           ].map((item, i) => (

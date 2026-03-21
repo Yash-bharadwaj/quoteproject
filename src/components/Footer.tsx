@@ -14,11 +14,11 @@ export default function Footer() {
             <img src="/dpeipics/DpeiLogo.png" alt="DEE PIESS" className="w-12 h-12" />
             <div>
               <p className="font-serif text-xl font-bold tracking-tight uppercase leading-none text-black">DEE PIESS</p>
-              <p className="text-[9px] uppercase tracking-[0.35em] text-black font-bold mt-0.5">Interior Projects</p>
+              <p className="text-[9px] uppercase tracking-[0.35em] text-black font-bold mt-0.5">Interior Contractor</p>
             </div>
           </div>
           <p className="text-black text-sm leading-relaxed max-w-xs">
-            Crafting luxury interiors for hotels, residences, corporate offices and commercial spaces across India.
+            Trusted interior contracting for hotels, homes, corporate offices, and commercial spaces across India.
           </p>
         </div>
 
@@ -29,9 +29,18 @@ export default function Footer() {
             <MapPin size={14} className="text-brand-gold mt-0.5 shrink-0" />
             <span>{COMPANY_DETAILS.address}</span>
           </div>
-          <a href="tel:+919848132615" className="flex items-center gap-2.5 text-sm text-black hover:text-brand-gold transition-colors">
+          <a
+            href={`https://wa.me/${COMPANY_DETAILS.phoneWhatsappWa}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2.5 text-sm text-black hover:text-brand-gold transition-colors"
+          >
             <Phone size={14} className="text-brand-gold shrink-0" />
-            <span>{COMPANY_DETAILS.phone}</span>
+            <span>WhatsApp {COMPANY_DETAILS.phoneWhatsappDisplay}</span>
+          </a>
+          <a href={`tel:${COMPANY_DETAILS.phoneSecondaryTel}`} className="flex items-center gap-2.5 text-sm text-black hover:text-brand-gold transition-colors">
+            <Phone size={14} className="text-brand-gold shrink-0" />
+            <span>{COMPANY_DETAILS.phoneSecondaryDisplay}</span>
           </a>
           <a href={`mailto:${COMPANY_DETAILS.email}`} className="flex items-center gap-2.5 text-sm text-black hover:text-brand-gold transition-colors">
             <Mail size={14} className="text-brand-gold shrink-0" />

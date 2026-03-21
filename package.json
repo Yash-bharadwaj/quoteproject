@@ -5,6 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite --port=3000 --host=0.0.0.0",
+    "sync:portfolio": "bash -c 'mkdir -p public/dpeipics && for d in monastery deccankitchen interiorworks mondaypremium overthemoon sunrise tulipgrand; do mkdir -p public/dpeipics/$d && cp -R src/dpeipics/$d/* public/dpeipics/$d/ 2>/dev/null || true; done'",
+    "prebuild": "npm run sync:portfolio",
     "build": "vite build",
     "preview": "vite preview",
     "clean": "rm -rf dist",

@@ -22,68 +22,25 @@ import { COMPANY_DETAILS } from '../constants';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import Sparkles from '../components/Sparkles';
+import { portfolioProjects, totalPortfolioPhotos, heroMonasterySlides } from '../data/portfolioProjects';
 
 const expertiseServices = [
   { icon: <Hotel size={28} />, title: "Hotels & Hospitality", desc: "Luxury interiors that define guest experiences.", points: ["Lobbies & reception", "Guest suites", "Dining & wellness spaces"], link: "/services" },
   { icon: <Home size={28} />, title: "Residences", desc: "Bespoke homes that reflect your lifestyle.", points: ["Custom furniture", "Kitchen & wardrobes", "Smart home integration"], link: "/services" },
   { icon: <Building2 size={28} />, title: "Corporate Offices", desc: "Workspaces that boost productivity and brand.", points: ["Executive suites", "Collaboration zones", "Ergonomic planning"], link: "/services" },
-  { icon: <Store size={28} />, title: "Commercial & Retail", desc: "Spaces that engage customers and drive sales.", points: ["Showrooms", "Visual merchandising", "Customer flow design"], link: "/services" },
+  { icon: <Store size={28} />, title: "Commercial & Retail", desc: "Spaces that engage customers and drive sales.", points: ["Showrooms", "Visual merchandising", "Customer flow planning"], link: "/services" },
   { icon: <Monitor size={28} />, title: "Kiosks & Modular", desc: "Flexible, high-impact display solutions.", points: ["Exhibition stalls", "Mall kiosks", "Pop-up units"], link: "/services" },
 ];
 
-// 3 best landscape/wide images for the hero carousel (1600×1200 — highest res, widest)
-const heroBannerImages = [
-  "/dpeipics/WhatsApp Image 2026-02-23 at 11.58.25.jpeg",
-  "/dpeipics/WhatsApp Image 2026-02-23 at 11.58.31 (1).jpeg",
-  "/dpeipics/WhatsApp Image 2026-02-23 at 11.58.35.jpeg",
-];
-
-// All 43 images for the gallery
-const allImages = [
-  "/dpeipics/WhatsApp Image 2026-02-23 at 11.57.35.jpeg",
-  "/dpeipics/WhatsApp Image 2026-02-23 at 11.57.36 (1).jpeg",
-  "/dpeipics/WhatsApp Image 2026-02-23 at 11.57.36.jpeg",
-  "/dpeipics/WhatsApp Image 2026-02-23 at 11.57.37 (1).jpeg",
-  "/dpeipics/WhatsApp Image 2026-02-23 at 11.57.37 (2).jpeg",
-  "/dpeipics/WhatsApp Image 2026-02-23 at 11.57.37.jpeg",
-  "/dpeipics/WhatsApp Image 2026-02-23 at 11.57.38 (1).jpeg",
-  "/dpeipics/WhatsApp Image 2026-02-23 at 11.57.38 (2).jpeg",
-  "/dpeipics/WhatsApp Image 2026-02-23 at 11.57.38.jpeg",
-  "/dpeipics/WhatsApp Image 2026-02-23 at 11.57.39 (1).jpeg",
-  "/dpeipics/WhatsApp Image 2026-02-23 at 11.57.39 (2).jpeg",
-  "/dpeipics/WhatsApp Image 2026-02-23 at 11.57.39.jpeg",
-  "/dpeipics/WhatsApp Image 2026-02-23 at 11.57.40 (1).jpeg",
-  "/dpeipics/WhatsApp Image 2026-02-23 at 11.57.40.jpeg",
-  "/dpeipics/WhatsApp Image 2026-02-23 at 11.57.41 (1).jpeg",
-  "/dpeipics/WhatsApp Image 2026-02-23 at 11.57.41 (2).jpeg",
-  "/dpeipics/WhatsApp Image 2026-02-23 at 11.57.41.jpeg",
-  "/dpeipics/WhatsApp Image 2026-02-23 at 11.57.42 (1).jpeg",
-  "/dpeipics/WhatsApp Image 2026-02-23 at 11.57.42 (2).jpeg",
-  "/dpeipics/WhatsApp Image 2026-02-23 at 11.57.42.jpeg",
-  "/dpeipics/WhatsApp Image 2026-02-23 at 11.57.43.jpeg",
-  "/dpeipics/WhatsApp Image 2026-02-23 at 11.58.24.jpeg",
-  "/dpeipics/WhatsApp Image 2026-02-23 at 11.58.25.jpeg",
-  "/dpeipics/WhatsApp Image 2026-02-23 at 11.58.30.jpeg",
-  "/dpeipics/WhatsApp Image 2026-02-23 at 11.58.31 (1).jpeg",
-  "/dpeipics/WhatsApp Image 2026-02-23 at 11.58.31.jpeg",
-  "/dpeipics/WhatsApp Image 2026-02-23 at 11.58.32 (1).jpeg",
-  "/dpeipics/WhatsApp Image 2026-02-23 at 11.58.32 (2).jpeg",
-  "/dpeipics/WhatsApp Image 2026-02-23 at 11.58.32.jpeg",
-  "/dpeipics/WhatsApp Image 2026-02-23 at 11.58.33 (1).jpeg",
-  "/dpeipics/WhatsApp Image 2026-02-23 at 11.58.33 (2).jpeg",
-  "/dpeipics/WhatsApp Image 2026-02-23 at 11.58.33.jpeg",
-  "/dpeipics/WhatsApp Image 2026-02-23 at 11.58.34 (1).jpeg",
-  "/dpeipics/WhatsApp Image 2026-02-23 at 11.58.34 (2).jpeg",
-  "/dpeipics/WhatsApp Image 2026-02-23 at 11.58.34.jpeg",
-  "/dpeipics/WhatsApp Image 2026-02-23 at 11.58.35 (1).jpeg",
-  "/dpeipics/WhatsApp Image 2026-02-23 at 11.58.35 (2).jpeg",
-  "/dpeipics/WhatsApp Image 2026-02-23 at 11.58.35.jpeg",
-  "/dpeipics/WhatsApp Image 2026-02-23 at 12.00.03.jpeg",
-  "/dpeipics/WhatsApp Image 2026-02-23 at 12.00.04 (1).jpeg",
-  "/dpeipics/WhatsApp Image 2026-02-23 at 12.00.04 (2).jpeg",
-  "/dpeipics/WhatsApp Image 2026-02-23 at 12.00.04.jpeg",
-  "/dpeipics/WhatsApp Image 2026-02-23 at 12.00.05.jpeg",
-];
+// 3 best landscape/wide images for the hero carousel — from Monastery folder
+const heroBannerImages =
+  heroMonasterySlides.length >= 3
+    ? heroMonasterySlides
+    : [
+        "/dpeipics/monastery/" + encodeURIComponent("WhatsApp Image 2026-02-23 at 11.58.25.jpeg"),
+        "/dpeipics/monastery/" + encodeURIComponent("WhatsApp Image 2026-02-23 at 11.58.31 (1).jpeg"),
+        "/dpeipics/monastery/" + encodeURIComponent("WhatsApp Image 2026-02-23 at 11.58.35.jpeg"),
+      ];
 
 function Counter({ value, suffix }: { value: number; suffix: string }) {
   const ref = useRef(null);
@@ -108,19 +65,74 @@ function Counter({ value, suffix }: { value: number; suffix: string }) {
   );
 }
 
-const WHATSAPP_PHONE = "919848132615";
+type GalleryState = { projectId: string; index: number };
 
 export default function LandingPage() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [direction, setDirection] = useState(1);
-  const [galleryIndex, setGalleryIndex] = useState<number | null>(null);
+  const [gallery, setGallery] = useState<GalleryState | null>(null);
   const [showInquiryPopup, setShowInquiryPopup] = useState(false);
   const [inquiryForm, setInquiryForm] = useState({ name: "", project: "", message: "" });
+  const touchStart = useRef<{ x: number; y: number } | null>(null);
 
-  const openGallery = (i: number) => setGalleryIndex(i);
-  const closeGallery = () => setGalleryIndex(null);
-  const prevGallery = () => setGalleryIndex(i => i !== null ? (i - 1 + allImages.length) % allImages.length : null);
-  const nextGallery = () => setGalleryIndex(i => i !== null ? (i + 1) % allImages.length : null);
+  const galleryProject = gallery
+    ? portfolioProjects.find((p) => p.id === gallery.projectId) ?? null
+    : null;
+  const galleryImages = galleryProject?.images ?? [];
+
+  const openGallery = (projectId: string, imageIndex = 0) =>
+    setGallery({ projectId, index: imageIndex });
+  const closeGallery = () => setGallery(null);
+  const prevGallery = () => {
+    setGallery((g) => {
+      if (!g) return null;
+      const proj = portfolioProjects.find((p) => p.id === g.projectId);
+      if (!proj) return null;
+      const next = g.index > 0 ? g.index - 1 : proj.images.length - 1;
+      return { projectId: g.projectId, index: next };
+    });
+  };
+  const nextGallery = () => {
+    setGallery((g) => {
+      if (!g) return null;
+      const proj = portfolioProjects.find((p) => p.id === g.projectId);
+      if (!proj) return null;
+      const next = g.index < proj.images.length - 1 ? g.index + 1 : 0;
+      return { projectId: g.projectId, index: next };
+    });
+  };
+
+  useEffect(() => {
+    if (!gallery) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setGallery(null);
+      if (e.key === "ArrowLeft") {
+        setGallery((g) => {
+          if (!g) return null;
+          const proj = portfolioProjects.find((p) => p.id === g.projectId);
+          if (!proj) return null;
+          const next = g.index > 0 ? g.index - 1 : proj.images.length - 1;
+          return { projectId: g.projectId, index: next };
+        });
+      }
+      if (e.key === "ArrowRight") {
+        setGallery((g) => {
+          if (!g) return null;
+          const proj = portfolioProjects.find((p) => p.id === g.projectId);
+          if (!proj) return null;
+          const next = g.index < proj.images.length - 1 ? g.index + 1 : 0;
+          return { projectId: g.projectId, index: next };
+        });
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = prevOverflow;
+    };
+  }, [gallery]);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -150,7 +162,7 @@ export default function LandingPage() {
       project && `Project: ${project}`,
       message.trim() && message.trim(),
     ].filter(Boolean).join("\n");
-    window.open(`https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(text)}`, "_blank");
+    window.open(`https://wa.me/${COMPANY_DETAILS.phoneWhatsappWa}?text=${encodeURIComponent(text)}`, "_blank");
     setInquiryForm({ name: "", project: "", message: "" });
     closeInquiryPopup();
   };
@@ -195,7 +207,7 @@ export default function LandingPage() {
               exit="exit"
               transition={{ duration: 1.4, ease: [0.25, 0.46, 0.45, 0.94] }}
               src={heroBannerImages[currentSlide]}
-              alt="DEE PIESS Interior Design"
+              alt="DEE PIESS — Interior Contractor"
               className="absolute inset-0 w-full h-full object-cover object-center"
             />
           </AnimatePresence>
@@ -212,7 +224,7 @@ export default function LandingPage() {
             animate={{ opacity: 1, y: 0 }}
             className="text-brand-gold text-[10px] sm:text-xs uppercase tracking-[0.4em] font-bold mb-6"
           >
-            Interior Architecture & Design
+            Interior Contractor
           </motion.p>
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
@@ -229,7 +241,7 @@ export default function LandingPage() {
             transition={{ delay: 0.4 }}
             className="text-white/60 text-base sm:text-lg md:text-xl max-w-2xl mx-auto mb-12 font-light leading-relaxed"
           >
-            Specializing in luxury hotels, bespoke residences, and high-performance corporate environments across India.
+            Specializing in luxury hotel interiors, bespoke homes, corporate offices, and commercial fit-outs across India — from planning and materials to on-site execution and handover.
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -306,10 +318,10 @@ export default function LandingPage() {
             What We Provide.
           </h2>
           <p className="text-white/50 text-base sm:text-lg max-w-2xl leading-relaxed mb-8 sm:mb-10">
-            End-to-end interior design: from concept and material selection to project handover. We design <strong className="text-white/70">hotels, homes, offices, retail spaces, and modular kiosks</strong>—with full conceptual planning, material curation, and project management.
+            End-to-end interior contracting: from planning and material selection through site execution to handover. We deliver <strong className="text-white/70">hotels, homes, offices, retail spaces, and modular kiosks</strong>—with planning, material sourcing, skilled workmanship, and project management.
           </p>
           <div className="flex flex-wrap gap-x-6 gap-y-2 sm:gap-y-3 text-[11px] sm:text-xs uppercase tracking-widest text-white/50">
-            {["Conceptual planning", "Material curation", "Project management"].map((item) => (
+            {["Planning & coordination", "Material sourcing", "On-site project management"].map((item) => (
               <span key={item} className="flex items-center gap-2">
                 <span className="w-1.5 h-1.5 rounded-full bg-brand-gold shrink-0" />
                 {item}
@@ -382,8 +394,14 @@ export default function LandingPage() {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
             <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8">
-              <p className="text-brand-gold text-[10px] sm:text-xs uppercase tracking-[0.3em] font-bold mb-1">Founder & Lead Designer</p>
+              <p className="text-brand-gold text-[10px] sm:text-xs uppercase tracking-[0.3em] font-bold mb-1">Founder & Contractor</p>
               <p className="text-xl sm:text-2xl md:text-3xl font-serif font-bold tracking-tight">{COMPANY_DETAILS.founder}</p>
+              <a
+                href={`tel:+${COMPANY_DETAILS.phoneWhatsappWa}`}
+                className="mt-2 block text-sm sm:text-base text-white/75 hover:text-brand-gold transition-colors tracking-wide"
+              >
+                {COMPANY_DETAILS.phoneWhatsappDisplay}
+              </a>
             </div>
           </motion.div>
 
@@ -395,10 +413,10 @@ export default function LandingPage() {
             <div className="h-1 w-16 bg-brand-gold rounded-full my-6" />
 
             <p className="text-white/60 text-base sm:text-lg leading-relaxed mb-6">
-              With over 15 years in interior architecture, {COMPANY_DETAILS.founder} has built DEE PIESS from the ground up. Based in Secunderabad, he leads every project from concept to handover — working closely with clients, craftsmen, and vendors to deliver spaces that are both beautiful and built to last.
+              With over 15 years as an interior contractor, {COMPANY_DETAILS.founder} has built DEE PIESS from the ground up. Based in Secunderabad, he leads every project from planning to handover — working closely with clients, craftsmen, and vendors to deliver spaces that are both beautiful and built to last.
             </p>
             <p className="text-white/60 text-base sm:text-lg leading-relaxed mb-8">
-              He believes every space has a soul. His job is to find it and bring it to life through clear design, the right materials, and strict attention to detail. No shortcuts, no compromise on finish — that's the standard he has set for the firm and for everyone who works with him.
+              He believes every space has a soul. His job is to find it and bring it to life through solid planning, the right materials, and strict attention to detail on site. No shortcuts, no compromise on finish — that's the standard he has set for the firm and for everyone who works with him.
             </p>
 
             <div className="space-y-3 mb-10">
@@ -415,7 +433,7 @@ export default function LandingPage() {
             </div>
 
             <blockquote className="border-l-2 border-brand-gold pl-5 py-2 text-white/50 italic text-sm sm:text-base mb-10">
-              "We don't just design spaces — we build places people want to live and work in."
+              "We deliver complete interiors — places people want to live and work in."
             </blockquote>
 
             <div className="flex flex-wrap gap-8 sm:gap-12 pt-4 border-t border-white/10">
@@ -479,118 +497,183 @@ export default function LandingPage() {
           </div>
           <div className="flex items-center gap-2 text-white/25 shrink-0">
             <Images size={16} />
-            <span className="text-xs uppercase tracking-widest font-bold">{allImages.length} Photos</span>
+            <span className="text-xs uppercase tracking-widest font-bold">{totalPortfolioPhotos} photos · {portfolioProjects.length} projects</span>
           </div>
         </div>
 
-        {/* Bento grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 auto-rows-[180px] sm:auto-rows-[220px] gap-3 sm:gap-4">
-          {allImages.map((src, i) => {
-            const isWide = i === 0 || i === 8 || i === 16 || i === 24 || i === 32 || i === 40;
-            const isTall = i === 4 || i === 12 || i === 20 || i === 28 || i === 36;
+        <p className="text-white/45 text-sm max-w-2xl mb-10 sm:mb-12 leading-relaxed">
+          Hotels, restaurants, and interior fit-outs across Hyderabad — tap a project to browse its gallery. Swipe left or right on the image on mobile.
+        </p>
+
+        {/* Project cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5 sm:gap-6">
+          {portfolioProjects.map((project, pIdx) => {
+            const cover = project.images[project.coverIndex] ?? project.images[0];
             return (
-              <motion.div
-                key={i}
+              <motion.article
+                key={project.id}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-40px' }}
-                transition={{ delay: (i % 8) * 0.05, duration: 0.45 }}
-                onClick={() => openGallery(i)}
-                className={`relative overflow-hidden rounded-xl sm:rounded-2xl cursor-pointer group
-                  ${isWide ? 'col-span-2' : ''}
-                  ${isTall ? 'row-span-2' : ''}
-                `}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ delay: pIdx * 0.06, duration: 0.45 }}
+                className="group relative rounded-2xl sm:rounded-3xl overflow-hidden border border-white/10 bg-white/[0.03] shadow-xl cursor-pointer text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold/60"
+                tabIndex={0}
+                role="button"
+                onClick={() => openGallery(project.id, 0)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    openGallery(project.id, 0);
+                  }
+                }}
               >
-                <img
-                  src={src}
-                  alt={`DEE PIESS — Monastery Hotel ${i + 1}`}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/45 transition-all duration-300" />
-                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <div className="w-10 h-10 rounded-full bg-white/15 backdrop-blur-sm border border-white/25 flex items-center justify-center">
-                    <Images size={15} className="text-white" />
+                <div className="relative w-full overflow-hidden bg-black/30 h-[260px] sm:h-[300px] md:h-[340px] lg:h-[400px] xl:h-[420px]">
+                  <img
+                    src={cover}
+                    alt=""
+                    className="absolute inset-0 block h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    loading="lazy"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw"
+                  />
+                  <div className="absolute inset-0 z-[1] bg-gradient-to-t from-black via-black/40 to-transparent opacity-90 sm:opacity-80 group-hover:opacity-95 transition-opacity" />
+                  <div className="absolute inset-0 z-[2] flex flex-col justify-end p-5 sm:p-6">
+                    <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-brand-gold mb-2">
+                      {project.category}
+                    </span>
+                    <h3 className="text-xl sm:text-2xl font-serif font-bold text-white leading-tight mb-1">
+                      {project.title}
+                    </h3>
+                    <p className="text-sm text-white/70 leading-snug line-clamp-2">{project.subtitle}</p>
+                    <div className="mt-4 flex items-center justify-between gap-3">
+                      <span className="text-[11px] uppercase tracking-widest font-bold text-white/50">
+                        {project.images.length} photos
+                      </span>
+                      <span className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-white bg-white/10 px-3 py-2 rounded-full border border-white/10 group-hover:bg-brand-gold group-hover:text-black group-hover:border-brand-gold transition-colors">
+                        <Images size={14} />
+                        View
+                      </span>
+                    </div>
                   </div>
                 </div>
-                <div className="absolute top-3 left-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <span className="text-[8px] uppercase tracking-widest font-bold text-white/80 bg-black/50 backdrop-blur-sm px-2 py-0.5 rounded-full">
-                    {i + 1}
-                  </span>
-                </div>
-              </motion.div>
+              </motion.article>
             );
           })}
         </div>
       </section>
 
-      {/* Lightbox */}
+      {/* Lightbox — project-scoped */}
       <AnimatePresence>
-        {galleryIndex !== null && (
+        {gallery && galleryProject && galleryImages.length > 0 && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.22 }}
-            className="fixed inset-0 z-50 bg-black/96 flex items-center justify-center cursor-pointer"
+            className="fixed inset-0 z-50 bg-black/96 flex flex-col items-center justify-center cursor-pointer"
             onClick={closeGallery}
             role="dialog"
             aria-modal="true"
+            aria-label={galleryProject.title}
           >
             <button
+              type="button"
               onClick={closeGallery}
-              className="absolute top-4 right-4 sm:top-6 sm:right-6 z-10 w-10 h-10 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white transition-colors"
+              className="absolute top-3 right-3 sm:top-4 sm:right-4 z-60 w-11 h-11 min-w-[44px] min-h-[44px] bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white transition-colors"
+              aria-label="Close gallery"
             >
-              <X size={20} />
+              <X size={22} />
             </button>
             <button
-              onClick={(e) => { e.stopPropagation(); prevGallery(); }}
-              className="absolute left-3 sm:left-6 z-10 w-10 h-10 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white transition-colors"
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                prevGallery();
+              }}
+              className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-60 w-11 h-11 min-w-[44px] min-h-[44px] bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white transition-colors"
+              aria-label="Previous photo"
             >
-              <ChevronLeft size={22} />
+              <ChevronLeft size={24} />
             </button>
             <button
-              onClick={(e) => { e.stopPropagation(); nextGallery(); }}
-              className="absolute right-3 sm:right-6 z-10 w-10 h-10 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white transition-colors"
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                nextGallery();
+              }}
+              className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-60 w-11 h-11 min-w-[44px] min-h-[44px] bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white transition-colors"
+              aria-label="Next photo"
             >
-              <ChevronRight size={22} />
+              <ChevronRight size={24} />
             </button>
 
-            <AnimatePresence mode="wait">
-              <motion.img
-                key={galleryIndex}
-                initial={{ opacity: 0, scale: 0.96 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.96 }}
-                transition={{ duration: 0.18 }}
-                src={allImages[galleryIndex]}
-                alt={`DEE PIESS — Monastery Hotel ${galleryIndex + 1}`}
-                className="max-h-[80vh] max-w-[85vw] object-contain rounded-xl shadow-2xl cursor-default"
-                onClick={(e) => e.stopPropagation()}
-                role="presentation"
-              />
-            </AnimatePresence>
-
-            {/* Thumbnail strip */}
-            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-1.5 overflow-x-auto max-w-[90vw] px-3 py-1">
-              {allImages.map((src, i) => (
-                <button
-                  key={i}
-                  onClick={(e) => { e.stopPropagation(); setGalleryIndex(i); }}
-                  className={`shrink-0 w-10 h-10 rounded-lg overflow-hidden border-2 transition-all duration-200 ${
-                    i === galleryIndex
-                      ? 'border-brand-gold scale-110 opacity-100'
-                      : 'border-transparent opacity-40 hover:opacity-75'
-                  }`}
-                >
-                  <img src={src} alt="" className="w-full h-full object-cover" />
-                </button>
-              ))}
+            <div
+              className="flex-1 flex flex-col items-center justify-center w-full min-h-0 px-4 pt-14 pb-2 sm:pt-4"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="text-center mb-3 sm:mb-4 px-4 shrink-0">
+                <p className="text-brand-gold text-[10px] sm:text-xs uppercase tracking-[0.25em] font-bold">
+                  {galleryProject.category}
+                </p>
+                <p className="text-white font-serif font-bold text-lg sm:text-xl mt-1">{galleryProject.title}</p>
+                <p className="text-white/50 text-xs sm:text-sm mt-0.5">{galleryProject.subtitle}</p>
+              </div>
+              <AnimatePresence mode="wait">
+                <motion.img
+                  key={`${gallery.projectId}-${gallery.index}`}
+                  initial={{ opacity: 0, scale: 0.98 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.98 }}
+                  transition={{ duration: 0.18 }}
+                  src={galleryImages[gallery.index]}
+                  alt={`${galleryProject.title} — ${gallery.index + 1}`}
+                  className="max-h-[min(58vh,520px)] sm:max-h-[min(72vh,680px)] w-auto max-w-[min(100%,92vw)] object-contain rounded-lg shadow-2xl cursor-default select-none"
+                  draggable={false}
+                  onTouchStart={(e) => {
+                    touchStart.current = {
+                      x: e.touches[0].clientX,
+                      y: e.touches[0].clientY,
+                    };
+                  }}
+                  onTouchEnd={(e) => {
+                    if (!touchStart.current) return;
+                    const dx = e.changedTouches[0].clientX - touchStart.current.x;
+                    const dy = e.changedTouches[0].clientY - touchStart.current.y;
+                    touchStart.current = null;
+                    if (Math.abs(dx) < 48 || Math.abs(dx) < Math.abs(dy)) return;
+                    if (dx > 0) prevGallery();
+                    else nextGallery();
+                  }}
+                  role="presentation"
+                />
+              </AnimatePresence>
             </div>
 
-            <div className="absolute bottom-[72px] left-1/2 -translate-x-1/2">
-              <span className="text-white/40 text-[10px] font-bold uppercase tracking-widest">
-                {galleryIndex + 1} / {allImages.length}
+            <div
+              className="w-full shrink-0 px-2 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-2 flex flex-col items-center gap-2 bg-gradient-to-t from-black/80 to-transparent"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <span className="text-white/50 text-[11px] font-bold uppercase tracking-widest">
+                {gallery.index + 1} / {galleryImages.length}
               </span>
+              <div className="flex gap-2 overflow-x-auto max-w-full px-2 py-1.5 pb-1 snap-x snap-mandatory [scrollbar-width:thin]">
+                {galleryImages.map((src, i) => (
+                  <button
+                    key={src + i}
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setGallery({ projectId: gallery.projectId, index: i });
+                    }}
+                    className={`min-w-[52px] w-[52px] h-[52px] sm:min-w-[48px] sm:w-12 sm:h-12 rounded-xl overflow-hidden border-2 shrink-0 snap-center transition-all duration-200 ${
+                      i === gallery.index
+                        ? "border-brand-gold scale-105 opacity-100 ring-2 ring-brand-gold/30"
+                        : "border-white/20 opacity-55 hover:opacity-90"
+                    }`}
+                  >
+                    <img src={src} alt="" className="w-full h-full object-cover" />
+                  </button>
+                ))}
+              </div>
             </div>
           </motion.div>
         )}
@@ -614,9 +697,9 @@ export default function LandingPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
               { step: "01", title: "Consultation", desc: "We begin by understanding your vision, lifestyle, and functional requirements through in-depth discussions." },
-              { step: "02", title: "Conceptualization", desc: "Our designers create detailed 2D layouts and 3D visualizations to bring your ideas to life before execution." },
-              { step: "03", title: "Material Selection", desc: "We curate the finest materials, from Italian marbles to bespoke hardware, ensuring durability and luxury." },
-              { step: "04", title: "Execution", desc: "Our skilled craftsmen and project managers ensure every detail is executed to perfection, on time and within budget." }
+              { step: "02", title: "Planning & drawings", desc: "Our team prepares detailed 2D layouts and 3D views so you can approve the look and scope before work begins on site." },
+              { step: "03", title: "Materials", desc: "We source and procure materials — from marbles to bespoke hardware — matched to your budget, timeline, and finish quality." },
+              { step: "04", title: "Site execution", desc: "Our skilled site teams and project managers carry out the interior work on site to agreed quality, on time and within budget." }
             ].map((p, i) => (
               <div key={i} className="relative p-8 bg-white/5 rounded-3xl border border-white/5 hover:border-brand-gold/30 transition-all group">
                 <span className="text-5xl font-serif italic text-white/10 group-hover:text-brand-gold/20 transition-colors absolute top-4 right-8">{p.step}</span>
@@ -649,9 +732,19 @@ export default function LandingPage() {
                   <div className="w-10 h-10 bg-black/5 rounded-xl flex items-center justify-center shrink-0">
                     <Phone size={20} />
                   </div>
-                  <div>
+                  <div className="space-y-2">
                     <p className="text-[8px] sm:text-[10px] uppercase tracking-widest font-bold text-black/40 mb-1">Phone</p>
-                    <a href="tel:+919848132615" className="font-medium text-sm sm:text-base hover:underline block">{COMPANY_DETAILS.phone}</a>
+                    <a
+                      href={`https://wa.me/${COMPANY_DETAILS.phoneWhatsappWa}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-medium text-sm sm:text-base hover:underline block"
+                    >
+                      WhatsApp {COMPANY_DETAILS.phoneWhatsappDisplay}
+                    </a>
+                    <a href={`tel:${COMPANY_DETAILS.phoneSecondaryTel}`} className="font-medium text-sm sm:text-base hover:underline block">
+                      {COMPANY_DETAILS.phoneSecondaryDisplay}
+                    </a>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">

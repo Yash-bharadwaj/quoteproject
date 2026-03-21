@@ -304,7 +304,8 @@ export default function QuotationGenerator() {
       `Bank: ${COMPANY_DETAILS.bankDetails.bankName}\n` +
       `A/c No: ${COMPANY_DETAILS.bankDetails.accountNumber}\n` +
       `IFSC: ${COMPANY_DETAILS.bankDetails.ifsc}\n` +
-      `PhonePe/G-Pay: ${COMPANY_DETAILS.bankDetails.phonePe}\n\n` +
+      `PhonePe: ${COMPANY_DETAILS.bankDetails.phonePe}\n` +
+      `G-Pay: ${COMPANY_DETAILS.bankDetails.googlePay}\n\n` +
       `_Thank you for choosing ${COMPANY_DETAILS.name}!_`;
 
     const phone = data.client.phone.replace(/\D/g, '');
@@ -385,7 +386,7 @@ export default function QuotationGenerator() {
               </div>
               <div className="space-y-1.5">
                 <label className="text-[10px] uppercase tracking-[0.2em] text-stone-400 font-bold ml-1">Project Type</label>
-                <input type="text" name="projectType" value={data.client.projectType} onChange={handleClientChange} placeholder="3BHK Interior Design" className="w-full bg-stone-50 border border-stone-200 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-brand-accent/10 focus:border-brand-accent transition-all text-sm" />
+                <input type="text" name="projectType" value={data.client.projectType} onChange={handleClientChange} placeholder="3BHK interior contracting" className="w-full bg-stone-50 border border-stone-200 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-brand-accent/10 focus:border-brand-accent transition-all text-sm" />
               </div>
               <div className="space-y-1.5">
                 <label className="text-[10px] uppercase tracking-[0.2em] text-stone-400 font-bold ml-1">Quote Number</label>

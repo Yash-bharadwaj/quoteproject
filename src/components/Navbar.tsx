@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import { Menu, X } from 'lucide-react';
+import { COMPANY_DETAILS } from '../constants';
 
 const SCROLL_THRESHOLD = 70;
 const THROTTLE_MS = 120;
@@ -55,7 +56,7 @@ export default function Navbar() {
           />
           <div className="flex flex-col">
             <span className="font-serif text-xl font-bold tracking-tight uppercase leading-none">DEE PIESS</span>
-            <span className="text-[8px] uppercase tracking-[0.4em] text-white/40 font-bold group-hover:text-brand-gold transition-colors">Interior Projects</span>
+            <span className="text-[8px] uppercase tracking-[0.4em] text-white/40 font-bold group-hover:text-brand-gold transition-colors">Interior Contractor</span>
           </div>
         </Link>
         
@@ -95,9 +96,19 @@ export default function Navbar() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: '100%' }}
             transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-            className="fixed inset-0 z-[60] bg-black md:hidden flex flex-col p-8 pt-24"
+            className="fixed inset-0 z-[60] bg-black md:hidden flex flex-col p-6 pt-[max(1.5rem,env(safe-area-inset-top))] pb-8"
           >
-            <div className="flex flex-col gap-8">
+            <div className="flex justify-end items-center shrink-0 mb-6">
+              <button
+                type="button"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="flex h-12 w-12 min-h-[48px] min-w-[48px] items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors"
+                aria-label="Close menu"
+              >
+                <X size={26} strokeWidth={2} />
+              </button>
+            </div>
+            <div className="flex flex-col gap-8 flex-1 min-h-0 overflow-y-auto">
               {navLinks.map((link) => (
                 <Link 
                   key={link.path} 
@@ -117,10 +128,11 @@ export default function Navbar() {
               </a>
             </div>
             
-            <div className="mt-auto pt-12 border-t border-white/10">
+            <div className="mt-auto pt-8 border-t border-white/10 shrink-0">
               <p className="text-[10px] uppercase tracking-[0.3em] text-white/30 font-bold mb-4">Contact</p>
               <p className="text-sm text-white/60 mb-1">dpei.projects@gmail.com</p>
-              <p className="text-sm text-white/60">+91 98481 32615</p>
+              <p className="text-sm text-white/60">WhatsApp {COMPANY_DETAILS.phoneWhatsappDisplay}</p>
+              <p className="text-sm text-white/60">{COMPANY_DETAILS.phoneSecondaryDisplay}</p>
             </div>
           </motion.div>
         )}
