@@ -107,7 +107,7 @@ export default function WhatsAppWidget() {
 
       {/* Instagram float button */}
       <motion.a
-        href="https://www.instagram.com/"
+        href={COMPANY_DETAILS.instagramUrl}
         target="_blank"
         rel="noopener noreferrer"
         whileHover={{ scale: 1.1 }}

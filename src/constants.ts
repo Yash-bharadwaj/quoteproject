@@ -12,6 +12,7 @@ export const COMPANY_DETAILS = {
   /** Single line for PDF / footer display */
   phone: "+91 98481 32615 · +91 96185 33654",
   email: "dpei.projects@gmail.com",
+  instagramUrl: "https://www.instagram.com/deepiess.interiors/",
   gstin: "36AAALC1234A1Z5", // Placeholder GST, update if needed
   founder: "Daga Srinivas Kumar",
   specialization: ["Hotels", "Residence", "Corporate Offices", "Commercial Outlets", "Kiosks"],
