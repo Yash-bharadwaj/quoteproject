@@ -4,6 +4,7 @@ import LandingPage from './pages/LandingPage';
 import QuotationGenerator from './pages/QuotationGenerator';
 import AboutPage from './pages/AboutPage';
 import ServicesPage from './pages/ServicesPage';
+import ContactPage from './pages/ContactPage';
 import WhatsAppWidget from './components/WhatsAppWidget';
 
 export default function App() {
@@ -13,6 +14,7 @@ export default function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/services" element={<ServicesPage />} />
+        <Route path="/contact" element={<ContactPage />} />
         <Route path="/daga" element={<QuotationGenerator />} />
       </Routes>
       <WhatsAppWidget />

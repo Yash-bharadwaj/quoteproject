@@ -38,6 +38,7 @@ export default function Navbar() {
     { name: 'Home', path: '/' },
     { name: 'About', path: '/about' },
     { name: 'Services', path: '/services' },
+    { name: 'Contact', path: '/contact' },
   ];
 
   return (
@@ -74,9 +75,9 @@ export default function Navbar() {
         </div>
 
         <div className="flex items-center gap-4">
-          <a href="/#contact" className="hidden sm:block bg-white text-black px-5 py-2 rounded-full text-[11px] uppercase tracking-widest font-bold hover:bg-brand-gold transition-all active:scale-95">
+          <Link to="/contact" className="hidden sm:block bg-white text-black px-5 py-2 rounded-full text-[11px] uppercase tracking-widest font-bold hover:bg-brand-gold transition-all active:scale-95">
             Get in Touch
-          </a>
+          </Link>
           
           {/* Mobile Menu Toggle */}
           <button 
@@ -119,13 +120,13 @@ export default function Navbar() {
                   {link.name}
                 </Link>
               ))}
-              <a 
-                href="/#contact" 
+              <Link 
+                to="/contact" 
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="text-2xl font-serif italic text-brand-gold hover:text-white transition-colors"
               >
                 Get in Touch
-              </a>
+              </Link>
             </div>
             
             <div className="mt-auto pt-8 border-t border-white/10 shrink-0">

@@ -9,6 +9,7 @@ import {
   CheckCircle2,
   ArrowRight
 } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { monasteryGalleryImages } from '../data/portfolioProjects';
@@ -136,9 +137,9 @@ export default function ServicesPage() {
             <p className="text-black/60 text-base sm:text-lg max-w-2xl mx-auto mb-10 sm:mb-12">
               Whether it's a single room or a multi-story hotel, we bring the same level of passion and precision to every project.
             </p>
-            <a href="/#contact" className="inline-block bg-black text-white px-10 sm:px-12 py-4 sm:py-5 rounded-full font-bold hover:scale-105 transition-all active:scale-95 text-sm sm:text-base">
+            <Link to="/contact" className="inline-block bg-black text-white px-10 sm:px-12 py-4 sm:py-5 rounded-full font-bold hover:scale-105 transition-all active:scale-95 text-sm sm:text-base">
               Get a Free Consultation
-            </a>
+            </Link>
           </div>
           {/* Decorative elements */}
           <div className="absolute top-0 right-0 w-48 sm:w-64 h-48 sm:h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl" />

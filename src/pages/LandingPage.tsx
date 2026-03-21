@@ -252,9 +252,9 @@ export default function LandingPage() {
             <a href="#gallery" className="bg-white text-black px-8 py-4 rounded-full font-bold flex items-center justify-center gap-2 hover:bg-brand-gold transition-all group text-sm sm:text-base">
               View Our Work <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
             </a>
-            <a href="#contact" className="border border-white/30 px-8 py-4 rounded-full font-bold hover:bg-white/10 transition-all text-sm sm:text-base">
+            <Link to="/contact" className="border border-white/30 px-8 py-4 rounded-full font-bold hover:bg-white/10 transition-all text-sm sm:text-base">
               Start a Project
-            </a>
+            </Link>
           </motion.div>
         </div>
 
