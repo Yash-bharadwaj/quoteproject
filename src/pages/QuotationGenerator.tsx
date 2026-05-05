@@ -354,7 +354,7 @@ export default function QuotationGenerator() {
         <header className="sticky top-0 z-20 bg-white/80 backdrop-blur-md border-b border-stone-200 px-4 py-2.5 flex justify-between items-center">
           <div className="flex items-center gap-2">
             <div className="w-7 h-7 bg-brand-ink rounded flex items-center justify-center text-white font-serif text-base">DP</div>
-            <h1 className="text-lg font-serif font-bold tracking-tight">DEE PIESS Quote</h1>
+            <h1 className="text-lg font-serif font-bold tracking-tight">DEE PI ESS Quote</h1>
           </div>
           <div className="flex gap-0.5">
             <button onClick={() => fileInputRef.current?.click()} className="p-2 text-stone-400 hover:text-brand-gold hover:bg-stone-50 rounded-lg transition-all active:scale-90" title="Import Project"><Upload size={16} /></button>

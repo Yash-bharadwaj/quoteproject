@@ -35,7 +35,7 @@ const PDFPreview = forwardRef<HTMLDivElement, PDFPreviewProps>(({ data, forCaptu
           <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
             <img
               src={COMPANY_DETAILS.logoUrl}
-              alt="DEE PIESS Logo"
+              alt="DEE PI ESS Logo"
               crossOrigin="anonymous"
               style={{ width: '48px', height: '48px', objectFit: 'contain', display: 'block' }}
             />

@@ -43,7 +43,7 @@ export default function WhatsAppWidget() {
                     <MessageCircle size={24} />
                   </div>
                   <div>
-                    <h4 className="font-serif font-bold text-lg leading-none">DEE PIESS</h4>
+                    <h4 className="font-serif font-bold text-lg leading-none">DEE PI ESS</h4>
                     <p className="text-[10px] text-white/50 uppercase tracking-widest mt-1">Typically replies in minutes</p>
                   </div>
                 </div>

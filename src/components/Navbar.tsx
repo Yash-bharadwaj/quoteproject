@@ -52,12 +52,12 @@ export default function Navbar() {
         <Link to="/" className="flex items-center gap-3 group">
           <img 
             src="/dpeipics/DpeiLogo.png" 
-            alt="DEE PIESS Logo" 
+            alt="DEE PI ESS Logo"
             className="w-10 h-10 object-contain"
           />
           <div className="flex flex-col">
-            <span className="font-serif text-xl font-bold tracking-tight uppercase leading-none">DEE PIESS</span>
-            <span className="text-[8px] uppercase tracking-[0.4em] text-white/40 font-bold group-hover:text-brand-gold transition-colors">Interior Contractor</span>
+            <span className="font-serif text-xl font-bold tracking-tight uppercase leading-none">DEE PI ESS</span>
+            <span className="text-[8px] uppercase tracking-[0.4em] text-white/40 font-bold group-hover:text-brand-gold transition-colors">Interiors Projects</span>
           </div>
         </Link>
         

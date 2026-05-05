@@ -1,6 +1,6 @@
 export const COMPANY_DETAILS = {
-  name: "DEE PIESS",
-  tagline: "INTERIOR CONTRACTOR",
+  name: "DEE PI ESS",
+  tagline: "INTERIOR PROJECTS",
   logoUrl: "/dpeipics/DpeiLogo.png",
   address: "6-7-21 D Block Bansilalpet R P Road Secunderabad",
   /** WhatsApp (forms, widgets) — use without + for wa.me */
@@ -13,7 +13,7 @@ export const COMPANY_DETAILS = {
   phone: "+91 98481 32615 · +91 96185 33654",
   email: "dpei.projects@gmail.com",
   instagramUrl: "https://www.instagram.com/deepiess.interiors/",
-  gstin: "36AAALC1234A1Z5", // Placeholder GST, update if needed
+  gstin: "36ALSPD8756F1ZN",
   founder: "Daga Srinivas Kumar",
   specialization: ["Hotels", "Residence", "Corporate Offices", "Commercial Outlets", "Kiosks"],
   bankDetails: {

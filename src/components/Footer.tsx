@@ -11,9 +11,9 @@ export default function Footer() {
         {/* Brand block */}
         <div className="space-y-4">
           <div className="flex items-center gap-3">
-            <img src="/dpeipics/DpeiLogo.png" alt="DEE PIESS" className="w-12 h-12" />
+            <img src="/dpeipics/DpeiLogo.png" alt="DEE PI ESS" className="w-12 h-12" />
             <div>
-              <p className="font-serif text-xl font-bold tracking-tight uppercase leading-none text-black">DEE PIESS</p>
+              <p className="font-serif text-xl font-bold tracking-tight uppercase leading-none text-black">DEE PI ESS</p>
               <p className="text-[9px] uppercase tracking-[0.35em] text-black font-bold mt-0.5">Interior Contractor</p>
             </div>
           </div>
@@ -66,7 +66,7 @@ export default function Footer() {
       <div className="border-t border-stone-100">
         <div className="max-w-7xl mx-auto px-6 py-4 flex flex-col sm:flex-row items-center justify-between gap-3">
           <div className="flex flex-col items-center sm:items-start gap-1">
-            <p className="text-[11px] uppercase tracking-widest font-bold text-black">© 2026 DEE PIESS. All rights reserved.</p>
+            <p className="text-[11px] uppercase tracking-widest font-bold text-black">© 2026 DEE PI ESS. All rights reserved.</p>
             <p className="text-[11px] text-black font-bold flex items-center gap-1.5">
               Designed with <Heart size={10} className="text-red-400 fill-red-400 shrink-0" /> by{' '}
               <a

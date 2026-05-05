@@ -62,7 +62,7 @@ export default function AboutPage() {
             <div className="h-1 w-16 bg-brand-gold rounded-full my-6" />
 
             <p className="text-white/60 text-base sm:text-lg leading-relaxed mb-6">
-              With over 15 years as an interior contractor, {COMPANY_DETAILS.founder} has built DEE PIESS from the ground up. Based in Secunderabad, he leads every project from planning to handover — working closely with clients, craftsmen, and vendors to deliver spaces that are both beautiful and built to last.
+              With over 15 years as an interior contractor, {COMPANY_DETAILS.founder} has built DEE PI ESS from the ground up. Based in Secunderabad, he leads every project from planning to handover — working closely with clients, craftsmen, and vendors to deliver spaces that are both beautiful and built to last.
             </p>
             <p className="text-white/60 text-base sm:text-lg leading-relaxed mb-8">
               He believes every space has a soul. His job is to find it and bring it to life through solid planning, the right materials, and strict attention to detail on site. No shortcuts, no compromise on finish — that’s the standard he has set for the firm and for everyone who works with him.
