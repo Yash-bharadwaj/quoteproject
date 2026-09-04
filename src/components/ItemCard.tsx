@@ -15,7 +15,7 @@ const ItemCard: React.FC<ItemCardProps> = ({ item, onDelete, onEdit, onClone }) 
     <div className="bg-white p-4 rounded-xl border border-stone-200 shadow-sm hover:shadow-md transition-shadow group">
       <div className="flex justify-between items-start mb-2">
         <h4 className="font-medium text-brand-ink leading-tight">{item.description}</h4>
-        <div className="flex gap-1 md:opacity-0 md:group-hover:opacity-100 transition-opacity">
+        <div className="flex gap-1">
           <button 
             onClick={() => onClone(item)}
             className="p-1.5 text-stone-400 hover:text-brand-gold hover:bg-stone-50 rounded-lg transition-all active:scale-90"
